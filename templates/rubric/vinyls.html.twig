@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous nos vinyles{% endblock %}
+
+{% block body %}
+    <h1>Nos vinyles</h1>
+    <div class="row">
+        {% for vinyl in vinyls %}
+            <div class="col-6 border">
+                <h2><a href="{{ path('vinyl', {id: vinyl.id}) }}">{{ vinyl.title | capitalize }}</a></h2>
+                <p>{{ vinyl.artist.name }}</p>
+                <p>Date de sortie : {{ vinyl.releaseDate | date("d/m/Y") }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

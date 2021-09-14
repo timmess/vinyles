@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ vinyl.artist.name }} - {{ vinyl.title }}{% endblock %}
+
+{% block body %}
+    <h1>{{ vinyl.title }}</h1>
+
+    <h2><a href="{{ path('artist', {id: vinyl.artist.id}) }}">{{ vinyl.artist.name }}</a></h2>
+    <h3 class="h4">Date de sortie : {{ vinyl.releaseDate | date("d/m/Y") }}</h3>
+    <h3 class="h5">Album : <a href="{{ path('album', {id:vinyl.album.id}) }}">{{ vinyl.album.name }}</a></h3>
+
+    <ul class="list-group">
+        <h2>Tracklist :</h2>
+        {% for track in vinyl.album.tracks %}
+            <li class="list-group-item d-flex justify-content-between"><span>{{ track.title }} ({{ track.duration }} sec)</span>  <span>position : {{ track.position }}</span></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
