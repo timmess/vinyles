@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous nos Artistes{% endblock %}
+
+{% block body %}
+    <h1>Nos Artistes</h1>
+    <div class="row">
+        {% for artist in artists %}
+            <div class="col-6 border">
+                <h2><a href="{{ path('artist', {id: artist.id}) }}">{{ artist.name }}</a></h2>
+                <hr/>
+                <span class="h2 text-decoration-underline">Ses albums :</span>
+                {% for album in artist.albums %}
+                    <h3><a href="{{ path('album', {id: album.id}) }}">{{ album.name | capitalize}}</a></h3>
+                {% endfor %}
+                <span class="h2 text-decoration-underline">Ses vinyles :</span>
+                {% for vinyl in artist.vinyls %}
+                    <h3><a href="{{ path('vinyl', {id:vinyl.id}) }}">{{ vinyl.title  | capitalize }} ({{ vinyl.releaseDate | date("d/m/Y") }})</a></h3>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous nos albums{% endblock %}
+
+{% block body %}
+    <h1>Nos Albums</h1>
+    <div class="row">
+        {% for album in albums %}
+            <div class="col-6 border">
+                <h2><a href="{{ path('album',{id:album.id}) }}">{{ album.name | capitalize}}</a></h2>
+                <p>{{ album.tracks | length }} chansons</p>
+                <h2 class="h5"><a href="{{ path('artist',{id:album.artist.id}) }}">{{ album.artist.name }}</a></h2>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
