@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <h1>Gérer les albums</h1>
+        <div class="col-2 my-2"><a href="{{ path("add_album") }}" class="btn btn-primary">Ajouter un album</a></div>
+    </div>
+    <div class="row">
+        {% for album in albums %}
+            <div class="col-2">
+                <img src="{{ album.photo }}" alt="" class="w-100">
+            </div>
+            <div class="col-4">
+                <h2 class="h4">{{ album.name }}</h2>
+                <h2 class="h5">{{ album.artist.name }}</h2>
+                <a href="{{ path('updateAlbum', {id:album.id}) }}" class="btn btn-info">Mettre à jour</a>
+                <a href="{{ path('deleteAlbum', {id:album.id}) }}">Supprimer</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

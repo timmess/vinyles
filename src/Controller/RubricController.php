@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\AlbumRepository;
 use App\Repository\ArtistRepository;
 use App\Repository\GenreRepository;
+use App\Repository\TrackRepository;
 use App\Repository\VinylRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -54,6 +55,17 @@ class RubricController extends AbstractController
         $genres = $repo->findAll();
         return $this->render('rubric/genres.html.twig', [
             'genres' => $genres,
+        ]);
+    }
+
+    /**
+     * @Route("/tracks", name="tracks")
+     */
+    public function indexTracks(TrackRepository $repo): Response
+    {
+        $tracks = $repo->findAll();
+        return $this->render('rubric/tracks.html.twig', [
+            'tracks' => $tracks,
         ]);
     }
 }

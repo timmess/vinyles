@@ -11,6 +11,8 @@
     <h3 class="h4">Date de sortie : {{ vinyl.releaseDate | date("d/m/Y") }}</h3>
     <h3 class="h5">Album : <a href="{{ path('album', {id:vinyl.album.id}) }}">{{ vinyl.album.name }}</a></h3>
 
+    <img src="{{ vinyl.photo }}" alt="">
+
     <ul class="list-group">
         <h2>Tracklist :</h2>
         {% for track in vinyl.album.tracks %}

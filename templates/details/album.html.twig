@@ -7,6 +7,10 @@
 
     <h2><a href="{{ path('artist', {id: album.artist.id}) }}">{{ album.artist.name }}</a></h2>
 
+    <h2 class="h5">Genre : {% for genre in album.genres %}<a href="{{ path('genre',{id:genre.id}) }}">{{ genre.name }}</a> {% if loop.last != true %} / {% endif %}{% endfor %}</h2>
+
+    <img src="{{ album.photo }}" alt="">
+    
     <ul class="list-group">
         <h2>Tracklist :</h2>
         {% for track in album.tracks %}

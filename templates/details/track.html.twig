@@ -1,7 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ album.artist.name }} - {{ album.name }}{% endblock %}
+{% block title %}{{ track.album.artist.name }} - {{ track.album.name }}{% endblock %}
 
 {% block body %}
     <h1>{{ track.title }}</h1>
+
+    <h2><a href="{{ path('artist',{id:track.album.artist.id}) }}">{{ track.album.artist.name }}</a></h2>
+    <h2><a href="{{ path('album',{id:track.album.id}) }}">{{ track.album.name }}</a></h2>
+
+    <p>{{ track.duration }} {% if track.duration >= 1 %}minutes{% else %}secondes{% endif %}</p>
 {% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous nos albums{% endblock %}
+
+{% block body %}
+    <h1>Nos tracks</h1>
+    <div class="row">
+        <div class="col-6 border">
+            {% for track in tracks %}
+                <a href="{{ path('track', {id:track.id}) }}">{{ track.title }}</a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

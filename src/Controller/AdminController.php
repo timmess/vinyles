@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Repository\AlbumRepository;
 use App\Repository\ArtistRepository;
 use App\Repository\GenreRepository;
+use App\Repository\TrackRepository;
 use App\Repository\VinylRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -55,6 +57,30 @@ class AdminController extends AbstractController
 
         return $this->render('admin/vinyls/index.html.twig', [
             'vinyls' => $vinyls
+        ]);
+    }
+
+    /**
+     * @Route("/admin/albums", name="admin_albums")
+     */
+    public function albums(AlbumRepository $repo): Response
+    {
+        $albums = $repo->findAll();
+
+        return $this->render('admin/albums/index.html.twig', [
+            'albums' => $albums
+        ]);
+    }
+
+    /**
+     * @Route("/admin/tracks", name="admin_tracks")
+     */
+    public function tracks(TrackRepository $repo): Response
+    {
+        $tracks = $repo->findAll();
+
+        return $this->render('admin/tracks/index.html.twig', [
+            'tracks' => $tracks
         ]);
     }
 }
