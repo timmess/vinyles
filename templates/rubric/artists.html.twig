@@ -9,6 +9,7 @@
             <div class="col-6 border">
                 <h2><a href="{{ path('artist', {id: artist.id}) }}">{{ artist.name }}</a></h2>
                 <hr/>
+                <p>Ses genres : {% for genre in artist.genres %}<a href="{{ path('genre', {id:genre.id}) }}">{{ genre.name }}</a>{% endfor %}</p>
                 <span class="h2 text-decoration-underline">Ses albums :</span>
                 {% for album in artist.albums %}
                     <h3><a href="{{ path('album', {id: album.id}) }}">{{ album.name | capitalize}}</a></h3>

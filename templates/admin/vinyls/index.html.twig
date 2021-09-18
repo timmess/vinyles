@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <h1>Gérer les vinyles</h1>
+        <div class="col-2 my-2"><a href="{{ path("addVinyl") }}" class="btn btn-primary">Ajouter un vinyle</a></div>
+    </div>
+    <div class="row">
+        {% for vinyl in vinyls %}
+            <div class="col-4">
+                <h2 class="h5">Artiste : {{ vinyl.artist.name }}</h2>
+                <img src="{{ vinyl.artist.photo }}" alt="" class="w-50">
+            </div>
+            <div class="col-4">
+                <h2 class="h5">Titre : {{ vinyl.title }}</h2>
+                <img src="{{ vinyl.photo }}" alt="" class="w-50">
+                <h2 class="h5">Album : {{ vinyl.album.name }}</h2>
+            </div>
+            <div class="col-2">
+                <a href="{{ path('updateVinyl', {id:vinyl.id}) }}" class="btn btn-info">Mettre à jour</a>
+                <a href="{{ path('deleteVinyl', {id:vinyl.id}) }}" class="btn btn-danger">Supprimer</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

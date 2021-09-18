@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <h1>Gérer les artistes</h1>
+        <div class="col-2 my-2"><a href="{{ path("add_artist") }}" class="btn btn-primary">Ajouter un artiste</a></div>
+    </div>
+    <div class="row">
+        {% for artist in artists %}
+            <div class="col-2">
+                <img src="{{ artist.photo }}" alt="" class="w-100">
+            </div>
+            <div class="col-4">
+                <h2 class="h5">{{ artist.name }}</h2>
+                <a href="{{ path('updateArtist', {id:artist.id}) }}" class="btn btn-info">Mettre à jour</a>
+                <a href="{{ path('deleteArtist', {id:artist.id}) }}">Supprimer</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\AlbumRepository;
 use App\Repository\ArtistRepository;
+use App\Repository\GenreRepository;
 use App\Repository\TrackRepository;
 use App\Repository\VinylRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,7 +31,7 @@ class DetailsController extends AbstractController
     {
         $track = $repo->find($id);
         return $this->render('details/track.html.twig', [
-            'vinyl' => $track
+            'track' => $track
         ]);
     }
 
@@ -53,6 +54,17 @@ class DetailsController extends AbstractController
         $artist = $repo->find($id);
         return $this->render('details/artist.html.twig', [
             'artist' => $artist
+        ]);
+    }
+
+    /**
+     * @Route("/genre/{id}", name="genre")
+     */
+    public function genreDetail(GenreRepository $repo, $id): Response
+    {
+        $genre = $repo->find($id);
+        return $this->render('details/genre.html.twig', [
+            'genre' => $genre
         ]);
     }
 }

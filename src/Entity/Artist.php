@@ -25,12 +25,12 @@ class Artist
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Vinyl::class, mappedBy="artist")
+     * @ORM\OneToMany(targetEntity=Vinyl::class, mappedBy="artist", cascade={"remove"})
      */
     private $vinyls;
 
     /**
-     * @ORM\OneToMany(targetEntity=Album::class, mappedBy="artist")
+     * @ORM\OneToMany(targetEntity=Album::class, mappedBy="artist", cascade={"remove"})
      */
     private $albums;
 

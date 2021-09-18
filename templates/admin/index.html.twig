@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+    <ul>
+        <li>
+            <a href="{{ path('admin_artists') }}">Gérer les artistes</a>
+        </li>
+
+        <li>
+            <a href="{{ path('admin_vinyls') }}">Gérer les Vinyles</a>
+        </li>
+
+
+        <li>
+            <a href="{{ path('admin_artists') }}">Gérer les Albums</a>
+        </li>
+
+
+        <li>
+            <a href="{{ path('admin_genres') }}">Gérer les Genres</a>
+        </li>
+    </ul>
+{% endblock %}

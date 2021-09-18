@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les genres{% endblock %}
+
+{% block body %}
+    <h1>Tous les genres</h1>
+    <div class="row">
+        {% for genre in genres %}
+            <div class="col-6 border">
+                <h2><a href="{{ path('genre', {id: genre.id}) }}">{{ genre.name }}</a></h2>
+                {% for artist in genre.artists %}
+                    <h3 class="h4"><a href="{{ path('artist', {id: artist.id}) }}">{{ artist.name }}</a></h3>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
