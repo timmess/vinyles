@@ -9,6 +9,7 @@
             <div class="col-6 border">
                 <h2><a href="{{ path('artist', {id: artist.id}) }}">{{ artist.name }}</a></h2>
                 <hr/>
+                <img src="{{ artist.photo }}" alt="" class="w-100 border mh-5">
                 <p>Genre{% if artist.genres | length > 1 %}s{% endif%} : {% for genre in artist.genres %}<a href="{{ path('genre', {id:genre.id}) }}">{{ genre.name }}</a>{% endfor %}</p>
                 <span class="h2 text-decoration-underline">Albums :</span>
                 {% for album in artist.albums %}

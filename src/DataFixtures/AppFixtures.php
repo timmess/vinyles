@@ -1,125 +1,28 @@
 <?php
-//// Tentative d'intégration des genres
-//
-//namespace App\DataFixtures;
-//
-//use App\Entity\Album;
-//use App\Entity\Artist;
-//use App\Entity\Genre;
-//use App\Entity\Track;
-//use App\Entity\Vinyl;
-//use Doctrine\Bundle\FixturesBundle\Fixture;
-//use Doctrine\Persistence\ObjectManager;
-//use Faker;
-//
-//class AppFixtures extends Fixture
-//{
-//    public function random_float($start_number = 0,$end_number = 1,$mul = 1000000)
-//    {
-//        if ($start_number > $end_number) return false;
-//        return mt_rand($start_number * $mul,$end_number * $mul)/$mul;
-//    }
-//
-//    public function load(ObjectManager $manager)
-//    {
-//        $faker = Faker\Factory::create();
-//
-//        $genres = [];
-//        $artist_genres = [];
-//
-//        //Genre Loop
-//        for ($i = 0; $i <= 3; $i++){
-//            $genre = new Genre();
-//
-//            $genre  ->setName($faker->word);
-//            $genres[] = $genre;
-//        }
-//
-//        //Artist loop
-//        for ($i = 1; $i <= 4; $i++){
-//            $artist = new Artist;
-//
-//            $artist ->setName($faker->name)
-//                    ->setPhoto($faker->imageUrl());
-//
-//            $p = rand(0,2);
-//
-//            for ($i = $p; $i<=2;$i++){
-//                $artist_genres = $genres[$i];
-//            }
-//
-//            foreach ($artist_genres as $genre){
-//                $artist ->addGenre($genre);
-//            }
-//
-//            //Album loop
-//            $f = rand(1, 3);
-//            for ($e = $f; $e <= 3; $e++){
-//                $album = new Album();
-//                $album  ->setName($faker->word)
-//                        ->setPhoto($faker->imageUrl());
-//                foreach ($artist_genres as $genre){
-//                    $album ->addGenre($genre);
-//                }
-//
-//                //Tracks loop
-//                $u = rand(2, 12);
-//                $position = 1;
-//                for ($v = $u; $v <=12 ; $v++){
-//                    $track = new Track();
-//                    $rand = $this->random_float(1, 4);
-//
-//                    $track  ->setTitle($faker->word)
-//                            ->setDuration(round($rand, 2))
-//                            ->setAlbum($album)
-//                            ->setPosition($position);
-//
-//                    $manager->persist($track);
-//                    $position++;
-//                }
-//
-//                //Vinyl loop
-//                $n = rand(1, 5);
-//                for ($a = $n; $a < 6; $a++){
-//                    $vinyl = new Vinyl();
-//                    $vinyl  ->setTitle($album->getName())
-//                            ->setReleaseDate($faker->dateTime($max = 'now', $timezone = null))
-//                            ->setAlbum($album)
-//                            ->setPhoto($faker->imageUrl());
-//                            foreach ($artist_genres as $genre){
-//                                $vinyl ->addGenre($genre);
-//                            }
-//                    $artist ->addVinyl($vinyl);
-//
-//                    $manager->persist($vinyl);
-//                }
-//                $artist ->addAlbum($album);
-//
-//                $manager->persist($genre);
-//                $manager->persist($album);
-//            }
-//            $manager->persist($artist);
-//        }
-//        $manager->flush();
-//    }
-//}
-
-// Fixtures qui marchent
 namespace App\DataFixtures;
 
 use App\Entity\Album;
 use App\Entity\Artist;
 use App\Entity\Genre;
 use App\Entity\Track;
+use App\Entity\User;
 use App\Entity\Vinyl;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 //TODO: inserer plusieurs genres dans les artistes / albums.
 //TODO: Donner des genres aux tracks.
 class AppFixtures extends Fixture
 {
+    private $passwordHasher;
+
+    public function __construct(UserPasswordHasherInterface $passwordHasher)
+     {
+         $this->passwordHasher = $passwordHasher;
+     }
+
     public function random_float($start_number = 0, $end_number = 1, $mul = 1000000)
     {
         if ($start_number > $end_number) return false;
@@ -131,6 +34,31 @@ class AppFixtures extends Fixture
         $faker = Faker\Factory::create();
 
         $genres = [];
+
+        $adminUser = new User();
+        $adminUser   ->setEmail('a@a.a')
+                ->setPhoto('https://www.gojira-music.com/sites/g/files/g2000011726/f/202102/featured-music.jpg')
+                ->setFirstname('Tim')
+                ->setLastname('Messaoudene')
+                ->setPassword($this->passwordHasher->hashPassword(
+                    $adminUser,
+                    'aaaaaa'
+                ))
+                ->setRoles(['ROLE_ADMIN']);
+        $manager->persist($adminUser);
+
+        for ($i=0;$i<10;$i++){
+            $user = new User();
+            $user   ->setEmail($faker->email)
+                ->setPhoto($faker->imageUrl())
+                ->setFirstname($faker->firstName)
+                ->setLastname($faker->lastName)
+                ->setPassword($this->passwordHasher->hashPassword(
+                    $user,
+                    $faker->password
+                ));
+            $manager->persist($user);
+        }
 
         //Genre Loop
         for ($i = 0; $i <= 3; $i++){

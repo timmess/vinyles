@@ -54,10 +54,16 @@ class Vinyl
      */
     private $genres;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="vinyls")
+     */
+    private $users;
+
     public function __construct()
     {
         $this->tracks = new ArrayCollection();
         $this->genres = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -177,6 +183,33 @@ class Vinyl
     {
         if ($this->genres->removeElement($genre)) {
             $genre->removeVinyl($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addVinyl($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeVinyl($this);
         }
 
         return $this;
