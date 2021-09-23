@@ -16,11 +16,12 @@ class RubricController extends AbstractController
     /**
      * @Route("/vinyls", name="vinyls")
      */
-    public function indexVinyls(VinylRepository $repo): Response
+    public function indexVinyls(VinylRepository $vinylRepo, ArtistRepository $artistRepo): Response
     {
-        $vinyls = $repo->findAll();
+        $artists = $artistRepo->findAll();
+
         return $this->render('rubric/vinyls.html.twig', [
-            'vinyls' => $vinyls,
+            'artists' => $artists
         ]);
     }
 
@@ -39,11 +40,13 @@ class RubricController extends AbstractController
     /**
      * @Route("/albums", name="albums")
      */
-    public function indexAlbums(AlbumRepository $repo): Response
+    public function indexAlbums(AlbumRepository $albumRepository, ArtistRepository $artistRepository): Response
     {
-        $albums = $repo->findAll();
+        $artists = $artistRepository->findAll();
+        $albums = $albumRepository->findAll();
         return $this->render('rubric/albums.html.twig', [
             'albums' => $albums,
+            'artists' => $artists,
         ]);
     }
 

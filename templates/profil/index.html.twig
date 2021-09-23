@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil de {{ user.firstname }} {{ user.lastname }}{% endblock %}
+
+{% block body %}
+    <h1>Mon profil</h1>
+
+    <h2>{{ user.firstname }} {{ user.lastname }}</h2>
+
+    <p>{{ user.email }}</p>
+
+    <img src="{{ user.photo }}" alt="">
+
+    <div>
+        <a href="{{ path('updateUser', {id:user.id}) }}" class="btn btn-primary">
+            Mettre à jour mon profil
+        </a>
+    </div>
+
+    <div>
+        <h2>Mes vinyls :</h2>
+
+{#        <pre>{{ dump(user.vinyls) }}</pre>#}
+
+        {% for vinyl in user.vinyls %}
+            <p><a href="{{ path('vinyl', {id:vinyl.id}) }}">{{ vinyl.title }}</a> ({{ vinyl.releaseDate | date("d/m/Y") }})</p>
+        {% endfor %}
+    </div>
+{% endblock %}

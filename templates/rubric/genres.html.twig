@@ -4,6 +4,9 @@
 
 {% block body %}
     <h1>Tous les genres</h1>
+    {% if admin %}
+        <a class="btn btn-info mb-3" href="{{ path('add_genre') }}">Ajouter un genre</a>
+    {% endif %}
     <div class="row">
         {% for genre in genres %}
             <div class="col-6 border">

@@ -4,6 +4,9 @@
 
 {% block body %}
     <h1>Nos tracks</h1>
+    {% if admin %}
+        <a class="btn btn-info mb-3" href="{{ path('add_track') }}">Ajouter une chanson</a>
+    {% endif %}
     <div class="row">
         <div class="col-6 border">
             {% for track in tracks %}

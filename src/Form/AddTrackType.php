@@ -24,7 +24,6 @@ class AddTrackType extends AbstractType
                 'choice_label'  => 'name',
                 'expanded'      => true,
             ])
-            ->add('Ajouter', SubmitType::class)
         ;
     }
 

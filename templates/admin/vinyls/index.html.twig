@@ -5,7 +5,7 @@
 {% block body %}
     <div class="row">
         <h1>Gérer les vinyles</h1>
-        <div class="col-2 my-2"><a href="{{ path("addVinyl") }}" class="btn btn-primary">Ajouter un vinyle</a></div>
+        <div class="col-2 my-2"><a href="{{ path("add_vinyl") }}" class="btn btn-primary">Ajouter un vinyle</a></div>
     </div>
     <div class="row">
         {% for vinyl in vinyls %}
@@ -19,7 +19,7 @@
                 <h2 class="h5">Album : {{ vinyl.album.name }}</h2>
             </div>
             <div class="col-2">
-                <a href="{{ path('updateVinyl', {id:vinyl.id}) }}" class="btn btn-info">Mettre à jour</a>
+                <a href="{{ path('update_vinyl', {id:vinyl.id}) }}" class="btn btn-info">Mettre à jour</a>
                 <a href="{{ path('deleteVinyl', {id:vinyl.id}) }}" class="btn btn-danger">Supprimer</a>
             </div>
         {% endfor %}

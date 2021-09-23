@@ -24,7 +24,6 @@ class AddArtistType extends AbstractType
                 'expanded'      => true,
                 'by_reference'  => false,
             ])
-            ->add('Ajouter', SubmitType::class)
         ;
     }
 

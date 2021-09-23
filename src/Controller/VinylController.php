@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class VinylController extends AbstractController
 {
     /**
-     * @Route("/addVinyle", name="addVinyl")
+     * @Route("/addVinyle", name="add_vinyl")
      */
     public function addVinyl(Request $request, EntityManagerInterface $manager): Response
     {
@@ -34,13 +34,13 @@ class VinylController extends AbstractController
             ]);
         }
 
-        return $this->render('admin/forms/form.html.twig', [
+        return $this->render('forms/vinyl_form.html.twig', [
             'form' =>$new_vinyl_form->createView()
         ]);
     }
 
     /**
-     * @Route("/updateVinyl/{id}", name="updateVinyl")
+     * @Route("/updateVinyl/{id}", name="update_vinyl")
      */
     public function updateVinyl(Request $request, EntityManagerInterface $manager, VinylRepository $repo, $id): Response
     {

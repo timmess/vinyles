@@ -50,10 +50,10 @@ class AppFixtures extends Fixture
         for ($i=0;$i<10;$i++){
             $user = new User();
             $user   ->setEmail($faker->email)
-                ->setPhoto($faker->imageUrl())
-                ->setFirstname($faker->firstName)
-                ->setLastname($faker->lastName)
-                ->setPassword($this->passwordHasher->hashPassword(
+                    ->setPhoto('https://via.placeholder.com/450')
+                    ->setFirstname($faker->firstName)
+                    ->setLastname($faker->lastName)
+                    ->setPassword($this->passwordHasher->hashPassword(
                     $user,
                     $faker->password
                 ));
@@ -75,7 +75,7 @@ class AppFixtures extends Fixture
             $r = rand(0,3);
 
             $artist ->setName($faker->name)
-                    ->setPhoto($faker->imageUrl())
+                    ->setPhoto('https://via.placeholder.com/450')
                     ->addGenre($genres[$r]);
             $r = rand(0,3);
             $artist->addGenre($genres[$r]);
@@ -85,7 +85,7 @@ class AppFixtures extends Fixture
             for ($e = $f; $e <= 3; $e++) {
                 $album = new Album();
                 $album  ->setName($faker->word)
-                        ->setPhoto($faker->imageUrl())
+                    ->setPhoto('https://via.placeholder.com/450')
                         ->addGenre($artist->getGenres()[0]);
 
                 //Tracks loop
@@ -112,12 +112,19 @@ class AppFixtures extends Fixture
                     $vinyl  ->setTitle($album->getName())
                             ->setReleaseDate($faker->dateTime($max = 'now', $timezone = null))
                             ->setAlbum($album)
-                            ->setPhoto($faker->imageUrl())
+                            ->setPhoto('https://via.placeholder.com/450')
                             ->addGenre($artist->getGenres()[0]);
 
                     $artist->addVinyl($vinyl);
+                    if ($a % 2 == 0){
+                        $user->addVinyl($vinyl);
+                    }else{
+                        $adminUser->addVinyl($vinyl);
+                    }
 
                     $manager->persist($vinyl);
+                    $manager->persist($user);
+                    $manager->persist($adminUser);
                 }
 
                 $artist->addAlbum($album);

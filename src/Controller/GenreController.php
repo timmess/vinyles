@@ -34,7 +34,7 @@ class GenreController extends AbstractController
             ]);
         }
 
-        return $this->render('admin/forms/form.html.twig', [
+        return $this->render('forms/genre_form.html.twig', [
             'form' =>$new_genre_form->createView()
         ]);
     }
@@ -62,7 +62,7 @@ class GenreController extends AbstractController
             ]);
         }
 
-        return $this->render('admin/forms/form.html.twig', [
+        return $this->render('forms/genre_form.html.twig', [
             'form' => $update_genre_form->createView(),
         ]);
     }

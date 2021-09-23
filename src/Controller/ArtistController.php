@@ -34,7 +34,7 @@ class ArtistController extends AbstractController
             ]);
         }
 
-        return $this->render('admin/forms/form.html.twig', [
+        return $this->render('forms/artist_form.html.twig', [
             'form' =>$new_artist_form->createView()
         ]);
     }
@@ -62,7 +62,7 @@ class ArtistController extends AbstractController
             ]);
         }
 
-        return $this->render('admin/forms/form.html.twig', [
+        return $this->render('forms/artist_form.html.twig', [
             'form' => $update_artist_form->createView(),
         ]);
     }

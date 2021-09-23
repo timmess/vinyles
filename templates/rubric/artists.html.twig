@@ -4,12 +4,15 @@
 
 {% block body %}
     <h1>Nos Artistes</h1>
+    {% if admin %}
+        <a class="btn btn-info mb-3" href="{{ path('add_artist') }}">Ajouter un artiste</a>
+    {% endif %}
     <div class="row">
         {% for artist in artists %}
             <div class="col-6 border">
                 <h2><a href="{{ path('artist', {id: artist.id}) }}">{{ artist.name }}</a></h2>
                 <hr/>
-                <img src="{{ artist.photo }}" alt="" class="w-100 border mh-5">
+                <img src="{{ artist.photo }}" alt="" class="w-100 border mh-15">
                 <p>Genre{% if artist.genres | length > 1 %}s{% endif%} : {% for genre in artist.genres %}<a href="{{ path('genre', {id:genre.id}) }}">{{ genre.name }}</a>{% endfor %}</p>
                 <span class="h2 text-decoration-underline">Albums :</span>
                 {% for album in artist.albums %}

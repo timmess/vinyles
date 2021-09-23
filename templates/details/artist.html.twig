@@ -4,8 +4,10 @@
 
 {% block body %}
     <h1>{{ artist.name | capitalize}}</h1>
-
     <img src="{{ artist.photo }}" alt="">
+    {% if admin == true %}
+        <div><a href="{{ path('updateArtist', {id:artist.id}) }}" class="btn btn-info">Mettre à jour {{ artist.name }}</a></div>
+    {% endif %}
     
     <h2>Genres</h2>
     <ul class="list-group">

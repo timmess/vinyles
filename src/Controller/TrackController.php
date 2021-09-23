@@ -34,7 +34,7 @@ class TrackController extends AbstractController
             ]);
         }
 
-        return $this->render('admin/forms/form.html.twig', [
+        return $this->render('forms/track_form.html.twig', [
             'form' =>$new_track_form->createView()
         ]);
     }
@@ -62,7 +62,7 @@ class TrackController extends AbstractController
             ]);
         }
 
-        return $this->render('admin/forms/form.html.twig', [
+        return $this->render('forms/track_form.html.twig', [
             'form' => $update_track_form->createView(),
         ]);
     }

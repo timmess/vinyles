@@ -34,7 +34,7 @@ class AlbumController extends AbstractController
             ]);
         }
 
-        return $this->render('admin/forms/form.html.twig', [
+        return $this->render('forms/album_form.html.twig', [
             'form' =>$new_album_form->createView()
         ]);
     }
@@ -62,7 +62,7 @@ class AlbumController extends AbstractController
             ]);
         }
 
-        return $this->render('admin/forms/form.html.twig', [
+        return $this->render('forms/album_form.html.twig', [
             'form' => $update_album_form->createView(),
         ]);
     }
