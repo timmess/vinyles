@@ -36,7 +36,7 @@ class ProfilController extends AbstractController
 
         $update_user_form->handleRequest($request);
 
-        if ($update_user_form->isSubmitted()){
+        if ($update_user_form->isSubmitted() && $update_user_form->isValid()){
             $user = $update_user_form->getData();
 
             $manager->persist($user);

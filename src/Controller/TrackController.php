@@ -22,7 +22,7 @@ class TrackController extends AbstractController
 
         $new_track_form = $this->createForm(AddTrackType::class, $track)->handleRequest($request);
 
-        if ($new_track_form->isSubmitted()){
+        if ($new_track_form->isSubmitted() && $new_track_form->isValid()){
             $track = $new_track_form->getData();
 
             $manager->persist($track);
@@ -50,7 +50,7 @@ class TrackController extends AbstractController
 
         $update_track_form->handleRequest($request);
 
-        if ($update_track_form->isSubmitted()){
+        if ($update_track_form->isSubmitted() && $update_track_form->isValid()){
             $track = $update_track_form->getData();
 
             $manager->persist($track);

@@ -1,9 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Vinyles{% endblock %}
+{% block title %}Vinylium{% endblock %}
 
 {% block body %}
     <div class="row">
-        <h1 class="text-primary">Vinyles</h1>
+        <h1 class="text-primary">Vinylium</h1>
+    </div>
+
+    {% if app.user %}
+        <p>Bonjour {{ user.firstname }} {{ user.lastname }}</p>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-6">
+
+        </div>
+        <div class="col-6">
+            <div class="d-flex flex-column">
+
+            </div>
+        </div>
     </div>
 {% endblock %}

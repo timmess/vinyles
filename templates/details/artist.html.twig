@@ -17,6 +17,7 @@
     </ul>
 
     <h2>Albums :</h2>
+    <div><a href="{{ path('addAlbumByArtist', {id:artist.id}) }}" class="btn btn-info">Ajouter un album</a></div>
     <ul class="list-group">
         {% for album in artist.albums %}
             <li class="list-group-item"><a href="{{ path('album', {id: album.id}) }}">{{ album.name }} </a></li>

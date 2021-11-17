@@ -16,13 +16,13 @@ class AlbumController extends AbstractController
     /**
      * @Route("/addAlbum", name="add_album")
      */
-    public function addArtist(Request $request, EntityManagerInterface $manager): Response
+    public function addAlbum(Request $request, EntityManagerInterface $manager): Response
     {
         $album = new Album();
 
         $new_album_form = $this->createForm(AddAlbumType::class, $album)->handleRequest($request);
 
-        if ($new_album_form->isSubmitted()){
+        if ($new_album_form->isSubmitted() && $new_album_form->isValid()){
             $album = $new_album_form->getData();
 
             $manager->persist($album);
@@ -50,7 +50,7 @@ class AlbumController extends AbstractController
 
         $update_album_form->handleRequest($request);
 
-        if ($update_album_form->isSubmitted()){
+        if ($update_album_form->isSubmitted() && $update_album_form->isValid()){
             $album = $update_album_form->getData();
 
             $manager->persist($album);

@@ -22,7 +22,7 @@ class GenreController extends AbstractController
 
         $new_genre_form = $this->createForm(AddGenreType::class, $genre)->handleRequest($request);
 
-        if ($new_genre_form->isSubmitted()){
+        if ($new_genre_form->isSubmitted() && $new_genre_form->isValid()){
             $genre = $new_genre_form->getData();
 
             $manager->persist($genre);
@@ -50,7 +50,7 @@ class GenreController extends AbstractController
 
         $update_genre_form->handleRequest($request);
 
-        if ($update_genre_form->isSubmitted()){
+        if ($update_genre_form->isSubmitted() && $update_genre_form->isValid()){
             $genre = $update_genre_form->getData();
 
             $manager->persist($genre);

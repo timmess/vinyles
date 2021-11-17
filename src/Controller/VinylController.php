@@ -22,7 +22,7 @@ class VinylController extends AbstractController
 
         $new_vinyl_form = $this->createForm(AddVinyleType::class, $vinyl)->handleRequest($request);
 
-        if ($new_vinyl_form->isSubmitted()){
+        if ($new_vinyl_form->isSubmitted() && $new_vinyl_form->isValid()){
             $vinyl = $new_vinyl_form->getData();
 
             $manager->persist($vinyl);
@@ -50,7 +50,7 @@ class VinylController extends AbstractController
 
         $update_vinyl_form->handleRequest($request);
 
-        if ($update_vinyl_form->isSubmitted()){
+        if ($update_vinyl_form->isSubmitted() && $update_vinyl_form->isValid()){
             $vinyl = $update_vinyl_form->getData();
 
             $manager->persist($vinyl);

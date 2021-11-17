@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Album;
 use App\Entity\Artist;
+use App\Form\AddAlbumType;
 use App\Form\AddArtistType;
 use App\Repository\ArtistRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,7 +24,7 @@ class ArtistController extends AbstractController
 
         $new_artist_form = $this->createForm(AddArtistType::class, $artist)->handleRequest($request);
 
-        if ($new_artist_form->isSubmitted()){
+        if ($new_artist_form->isSubmitted() && $new_artist_form->isValid()){
             $artist = $new_artist_form->getData();
 
             $manager->persist($artist);
@@ -50,7 +52,7 @@ class ArtistController extends AbstractController
 
         $update_artist_form->handleRequest($request);
 
-        if ($update_artist_form->isSubmitted()){
+        if ($update_artist_form->isSubmitted() and $update_artist_form->isValid()){
             $artist = $update_artist_form->getData();
 
             $manager->persist($artist);
@@ -64,6 +66,36 @@ class ArtistController extends AbstractController
 
         return $this->render('forms/artist_form.html.twig', [
             'form' => $update_artist_form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/addAlbumByArtist/{id}", name="addAlbumByArtist")
+     */
+    public function addAlbumByArtist($id, EntityManagerInterface $manager, ArtistRepository $artistRepo)
+    {
+        $album = new Album();
+
+        $artist = $artistRepo->find($id);
+        $album->setArtist($artist);
+
+        $add_album_by_artist_type = $this->createForm(AddAlbumType::class, $album);
+
+        if ($add_album_by_artist_type->isSubmitted() && $add_album_by_artist_type->isValid())
+        {
+            $album = $add_album_by_artist_type->getData();
+
+            $manager->persist($album);
+
+            $manager->flush();
+
+            return $this->redirectToRoute('artist', [
+                'id' => $id
+            ]);
+        }
+
+        return $this->render('forms/album_form.html.twig', [
+            'form' =>$add_album_by_artist_type->createView()
         ]);
     }
 
