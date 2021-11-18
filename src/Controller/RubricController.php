@@ -7,7 +7,9 @@ use App\Repository\ArtistRepository;
 use App\Repository\GenreRepository;
 use App\Repository\TrackRepository;
 use App\Repository\VinylRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -29,9 +31,15 @@ class RubricController extends AbstractController
     /**
      * @Route("/artists", name="artists")
      */
-    public function indexArtists(ArtistRepository $repo): Response
+    public function indexArtists(ArtistRepository $repo, Request $request, PaginatorInterface $paginator): Response
     {
         $artists = $repo->findAll();
+
+        $artists = $paginator->paginate(
+            $artists,
+            $request->query->getInt('page', 1),
+            4
+        );
         return $this->render('rubric/artists.html.twig', [
             'artists' => $artists,
         ]);
@@ -53,9 +61,14 @@ class RubricController extends AbstractController
     /**
      * @Route("/genres", name="genres")
      */
-    public function indexGenres(GenreRepository $repo): Response
+    public function indexGenres(GenreRepository $repo, Request $request, PaginatorInterface $paginator): Response
     {
         $genres = $repo->findAll();
+        $genres = $paginator->paginate(
+            $genres,
+            $request->query->getInt('page', 1),
+            4
+        );
         return $this->render('rubric/genres.html.twig', [
             'genres' => $genres,
         ]);

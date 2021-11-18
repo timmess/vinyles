@@ -19,5 +19,8 @@
                 <a href="{{ path('deleteAlbum', {id:album.id}) }}">Supprimer</a>
             </div>
         {% endfor %}
+        <div class="pagination">
+            {{ knp_pagination_render(albums) }}
+        </div>
     </div>
 {% endblock %}
