@@ -1,4 +1,6 @@
 @import "./themes/bootstrap";
+@import "./themes";
 
 @import "./base/style.scss";
-@import "./pages/home.scss";
+@import "./base/pages/home.scss";
+@import "./base/pages/header.scss";

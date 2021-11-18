@@ -23,12 +23,12 @@ class AddVinyleType extends AbstractType
             ->add('artist', EntityType::class, [
                 'class' => Artist::class,
                 'choice_label'  => 'name',
-                'expanded'      => true,
+                'expanded'      => false,
             ])
             ->add('album', EntityType::class, [
                 'class' => Album::class,
                 'choice_label'  => 'name',
-                'expanded'      => true,
+                'expanded'      => false,
             ])
             ->add('genres', EntityType::class, [
                 'class' => Genre::class,

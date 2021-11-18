@@ -12,16 +12,24 @@
             <div class="col-6 border">
                 <h2><a href="{{ path('artist', {id: artist.id}) }}">{{ artist.name }}</a></h2>
                 <hr/>
-                <img src="{{ artist.photo }}" alt="" class="w-100 border mh-15">
+                <div class="text-center">
+                    <img src="{{ artist.photo }}" alt="{{ artist.name }}" class="w-75 border mh-20">
+                </div>
                 <p>Genre{% if artist.genres | length > 1 %}s{% endif%} : {% for genre in artist.genres %}<a href="{{ path('genre', {id:genre.id}) }}">{{ genre.name }}</a>{% endfor %}</p>
-                <span class="h2 text-decoration-underline">Albums :</span>
-                {% for album in artist.albums %}
-                    <h3><a href="{{ path('album', {id: album.id}) }}">{{ album.name | capitalize}}</a></h3>
-                {% endfor %}
-                <span class="h2 text-decoration-underline">Vinyles :</span>
-                {% for vinyl in artist.vinyls %}
-                    <h3><a href="{{ path('vinyl', {id:vinyl.id}) }}">{{ vinyl.title  | capitalize }} ({{ vinyl.releaseDate | date("d/m/Y") }})</a></h3>
-                {% endfor %}
+                <p class="h2 text-decoration-underline">Albums :</p>
+                <ul class="list-group">
+                    {% for album in artist.albums %}
+                        <li class="list-group-item"><h3><a href="{{ path('album', {id: album.id}) }}">{{ album.name | capitalize}}</a></h3></li>
+                    {% endfor %}
+                </ul>
+                <p class="h2 text-decoration-underline mb-2">Vinyles :</p>
+                <ul class="list-group">
+                    {% for vinyl in artist.vinyls %}
+                        <li class="list-group-item">
+                            <h3><a href="{{ path('vinyl', {id:vinyl.id}) }}">{{ vinyl.title  | capitalize }} ({{ vinyl.releaseDate | date("d/m/Y") }})</a></h3>
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
         {% endfor %}
     </div>

@@ -10,9 +10,10 @@
     <div class="row">
         {% for genre in genres %}
             <div class="col-6 border">
-                <h2><a href="{{ path('genre', {id: genre.id}) }}">{{ genre.name }}</a></h2>
+                <h2><a class="h1 text-dark text-decoration-none" href="{{ path('genre', {id: genre.id}) }}">{{ genre.name | capitalize }}</a></h2>
+                <hr/>
                 {% for artist in genre.artists %}
-                    <h3 class="h4"><a href="{{ path('artist', {id: artist.id}) }}">{{ artist.name }}</a></h3>
+                    <h3 class="h4"><a href="{{ path('artist', {id: artist.id}) }}" class="text-decoration-none">{{ artist.name }}</a></h3>
                 {% endfor %}
             </div>
         {% endfor %}

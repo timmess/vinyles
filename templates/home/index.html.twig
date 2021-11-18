@@ -9,16 +9,22 @@
 
     {% if app.user %}
         <p>Bonjour {{ user.firstname }} {{ user.lastname }}</p>
+    {% else %}
+        <p>Envie de créer ta collection ? Rien de plus simple, <a href="{{ path('app_register') }}">inscris toi</a> !</p>
+        <p>Déja inscris ? <a href="{{ path('app_login') }}">Connectes toi</a> !</p>
     {% endif %}
 
-    <div class="row">
-        <div class="col-6">
-
-        </div>
-        <div class="col-6">
-            <div class="d-flex flex-column">
-
+    <div class="row border">
+        <h2>Nos derniers vinyls ajoutés :</h2>
+        {% for vinyl in last_vinyls %}
+            <div class="col-3">
+                <h3><a class="text-dark text-decoration-none" href="{{ path('vinyl',{id:vinyl.id}) }}">{{ vinyl.title }}</a></h3>
+                <a href="{{ path('vinyl',{id:vinyl.id}) }}"><img src="{{ vinyl.photo }}" alt="" class="w-100 mh-12"></a>
+                <p><a class="text-dark text-decoration-none" href="{{ path('artist',{id:vinyl.artist.id}) }}">{{ vinyl.artist.name }}</a> - <a class="text-dark text-decoration-none" href="{{ path('album',{id:vinyl.album.id}) }}">{{ vinyl.album.name }}</a></p>
             </div>
-        </div>
+        {% endfor %}
     </div>
+
+
+
 {% endblock %}

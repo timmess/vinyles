@@ -19,6 +19,14 @@ class VinylRepository extends ServiceEntityRepository
         parent::__construct($registry, Vinyl::class);
     }
 
+    public function findLastsVinyls(int $int){
+        return $this->createQueryBuilder('v')
+                    ->orderBy('v.id', 'DESC')
+                    ->setMaxResults($int)
+                    ->getQuery()
+                    ->getResult();
+    }
+
     // /**
     //  * @return Vinyl[] Returns an array of Vinyl objects
     //  */
