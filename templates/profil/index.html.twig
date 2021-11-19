@@ -20,10 +20,16 @@
     <div>
         <h2>Mes vinyls :</h2>
 
-{#        <pre>{{ dump(user.vinyls) }}</pre>#}
+        <ul class="list-group">
+            {% for vinyl in user_vinyls %}
+                <li class="list-group-item">
+                    <a href="{{ path('artist', {id:vinyl.artist.id}) }}">{{ vinyl.artist.name }}</a> - <a href="{{ path('vinyl', {id:vinyl.id}) }}">{{ vinyl.title }}</a> ({{ vinyl.releaseDate | date("d/m/Y") }})
+                </li>
+            {% endfor %}
+        </ul>
 
-        {% for vinyl in user.vinyls %}
-            <p><a href="{{ path('vinyl', {id:vinyl.id}) }}">{{ vinyl.title }}</a> ({{ vinyl.releaseDate | date("d/m/Y") }})</p>
-        {% endfor %}
+        <div class="pagination my-2">
+            {{ knp_pagination_render(user_vinyls) }}
+        </div>
     </div>
 {% endblock %}

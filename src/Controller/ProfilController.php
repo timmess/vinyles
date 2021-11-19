@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,13 +16,23 @@ class ProfilController extends AbstractController
     /**
      * @Route("/profil/{id}", name="profil")
      */
-    public function index($id, UserRepository $repository): Response
+    public function index($id, UserRepository $repository, Request $request, PaginatorInterface $paginator): Response
     {
         $user = $repository->find($id);
 
+        $user_vinyls = $user->getVinyls();
+        
+//        dd($user_vinyls);
+
+        $user_vinyls = $paginator->paginate(
+            $user_vinyls,
+            $request->query->getInt('page', 1),
+            10
+        );
 
         return $this->render('profil/index.html.twig', [
-            'user' => $user
+            'user'          => $user,
+            'user_vinyls'   => $user_vinyls
         ]);
     }
 
