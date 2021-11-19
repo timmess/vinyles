@@ -16,7 +16,7 @@
                 <h2 class="h4">{{ album.name }}</h2>
                 <h2 class="h5">{{ album.artist.name }}</h2>
                 <a href="{{ path('updateAlbum', {id:album.id}) }}" class="btn btn-info">Mettre à jour</a>
-                <a href="{{ path('deleteAlbum', {id:album.id}) }}">Supprimer</a>
+                <a href="{{ path('deleteAlbum', {id:album.id}) }}" class="btn btn-danger">Supprimer</a>
             </div>
         {% endfor %}
         <div class="pagination">

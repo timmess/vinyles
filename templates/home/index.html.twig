@@ -19,7 +19,7 @@
         {% for vinyl in last_vinyls %}
             <div class="col-3">
                 <h3><a class="text-dark text-decoration-none" href="{{ path('vinyl',{id:vinyl.id}) }}">{{ vinyl.title }}</a></h3>
-                <a href="{{ path('vinyl',{id:vinyl.id}) }}"><img src="{{ vinyl.photo }}" alt="" class="w-100 mh-12"></a>
+                <a href="{{ path('vinyl',{id:vinyl.id}) }}"><img src="{{ vinyl.photo }}" alt="" class="w-100 mh-15"></a>
                 <p><a class="text-dark text-decoration-none" href="{{ path('artist',{id:vinyl.artist.id}) }}">{{ vinyl.artist.name }}</a> - <a class="text-dark text-decoration-none" href="{{ path('album',{id:vinyl.album.id}) }}">{{ vinyl.album.name }}</a></p>
             </div>
         {% endfor %}

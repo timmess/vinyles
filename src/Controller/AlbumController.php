@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Album;
+use App\Entity\Vinyl;
 use App\Form\AddAlbumType;
+use App\Form\AddVinyleType;
 use App\Repository\AlbumRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -64,6 +66,40 @@ class AlbumController extends AbstractController
 
         return $this->render('forms/album_form.html.twig', [
             'form' => $update_album_form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/addVinylByAlbum/{id}", name="addVinylByAlbum")
+     */
+    public function addVinylByAlbum($id, EntityManagerInterface $manager, AlbumRepository $albumRepo, Request $request)
+    {
+        $vinyl = new Vinyl();
+
+        $album = $albumRepo->find($id);
+
+        $vinyl  ->setAlbum($album)
+                ->setTitle($album->getName())
+                ->setPhoto(($album->getPhoto()))
+                ->setArtist($album->getArtist());
+
+        $add_vinyl_by_album_type = $this->createForm(AddVinyleType::class, $vinyl)->handleRequest($request);
+
+        if ($add_vinyl_by_album_type->isSubmitted() && $add_vinyl_by_album_type->isValid())
+        {
+            $vinyl = $add_vinyl_by_album_type->getData();
+
+            $manager->persist($vinyl);
+
+            $manager->flush();
+
+            return $this->redirectToRoute('album', [
+                'id' => $id
+            ]);
+        }
+
+        return $this->render('forms/vinyl_form.html.twig', [
+            'form' =>$add_vinyl_by_album_type->createView()
         ]);
     }
 

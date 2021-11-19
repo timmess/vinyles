@@ -15,7 +15,7 @@
             <div class="col-4">
                 <h2 class="h5">{{ artist.name }}</h2>
                 <a href="{{ path('updateArtist', {id:artist.id}) }}" class="btn btn-info">Mettre à jour</a>
-                <a href="{{ path('deleteArtist', {id:artist.id}) }}">Supprimer</a>
+                <a href="{{ path('deleteArtist', {id:artist.id}) }}" class="btn btn-danger">Supprimer</a>
             </div>
         {% endfor %}
         <div class="pagination">
