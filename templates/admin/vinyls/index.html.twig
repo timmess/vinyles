@@ -23,7 +23,7 @@
                 <a href="{{ path('deleteVinyl', {id:vinyl.id}) }}" class="btn btn-danger">Supprimer</a>
             </div>
         {% endfor %}
-        <div class="pagination">
+        <div class="pagination my-2">
             {{ knp_pagination_render(vinyls) }}
         </div>
     </div>

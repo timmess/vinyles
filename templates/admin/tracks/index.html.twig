@@ -15,7 +15,7 @@
                 <a href="{{ path('deleteTrack', {id:track.id}) }}" class="btn btn-danger">Supprimer</a>
             </div>
         {% endfor %}
-        <div class="pagination">
+        <div class="pagination my-2">
             {{ knp_pagination_render(tracks) }}
         </div>
     </div>

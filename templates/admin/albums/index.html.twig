@@ -19,7 +19,7 @@
                 <a href="{{ path('deleteAlbum', {id:album.id}) }}" class="btn btn-danger">Supprimer</a>
             </div>
         {% endfor %}
-        <div class="pagination">
+        <div class="pagination my-2">
             {{ knp_pagination_render(albums) }}
         </div>
     </div>

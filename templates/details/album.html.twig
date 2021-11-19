@@ -11,11 +11,13 @@
 
     <img src="{{ album.photo }}" alt="">
 
-    <div>
-        <a href="{{ path('updateAlbum',{id:album.id}) }}" class="btn btn-info">
-            Mettre à jour {{ album.name }}
-        </a>
-    </div>
+    {% if admin == true %}
+        <div>
+            <a href="{{ path('updateAlbum',{id:album.id}) }}" class="btn btn-info">
+                Mettre à jour {{ album.name }}
+            </a>
+        </div>
+    {% endif %}
 
     <ul class="list-group">
         <h2>Tracklist :</h2>

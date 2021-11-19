@@ -36,15 +36,15 @@ class AppFixtures extends Fixture
         $genres = [];
 
         $adminUser = new User();
-        $adminUser   ->setEmail('a@a.a')
-                ->setPhoto('https://www.gojira-music.com/sites/g/files/g2000011726/f/202102/featured-music.jpg')
-                ->setFirstname('Tim')
-                ->setLastname('Messaoudene')
-                ->setPassword($this->passwordHasher->hashPassword(
-                    $adminUser,
-                    'aaaaaa'
-                ))
-                ->setRoles(['ROLE_ADMIN']);
+        $adminUser      ->setEmail('a@a.a')
+                        ->setPhoto('https://www.gojira-music.com/sites/g/files/g2000011726/f/202102/featured-music.jpg')
+                        ->setFirstname('Tim')
+                        ->setLastname('Messaoudene')
+                        ->setPassword($this->passwordHasher->hashPassword(
+                            $adminUser,
+                            'aaaaaa'
+                        ))
+                        ->setRoles(['ROLE_ADMIN']);
         $manager->persist($adminUser);
 
         for ($i=0;$i<10;$i++){

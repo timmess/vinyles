@@ -13,22 +13,4 @@
             </li>
         {% endfor %}
     </ul>
-
-    <h2>Albums :</h2>
-    <ul class="list-group">
-        {% for album in genre.albums %}
-            <li class="list-group-item">
-                <a href="{{ path('album',{id:album.id}) }}">{{ album.name }}</a>
-            </li>
-        {% endfor %}
-    </ul>
-
-    <h2>Vinyles :</h2>
-    <ul class="list-group">
-        {% for vinyl in genre.vinyl %}
-            <li class="list-group-item">
-                <div><a href="{{ path('vinyl',{id:vinyl.id}) }}">{{ vinyl.title }}</a>({{ vinyl.releaseDate | date("d/m/Y") }})</div>
-            </li>
-        {% endfor %}
-    </ul>
 {% endblock %}
