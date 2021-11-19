@@ -14,12 +14,16 @@
     <img src="{{ vinyl.photo }}" alt="">
 
     {% if app.user %}
-        <div>
-            <a href="{{ path('addVinylToUserCollection', {id:vinyl.id, userId: app.user.id}) }}" class="btn btn-primary">Ajouter ce vinyle à ma collection</a>
-        </div>
+        {% if vinyl not in app.user.vinyls %}
+            <div>
+                <a href="{{ path('addVinylToUserCollection', {id:vinyl.id, userId: app.user.id}) }}" class="btn btn-primary my-2">Ajouter ce vinyle à ma collection</a>
+            </div>
+        {% else %}
+            <p>Vous possédez déjà ce vinyle</p>
+        {% endif %}
     {% endif %}
 
-    <ul class="list-group">
+    <ul class="list-group my-2">
         <h2>Tracklist :</h2>
         {% for track in vinyl.album.tracks %}
             <li class="list-group-item d-flex justify-content-between"><span>{{ track.title }} ({{ track.duration }} sec)</span>  <span>position : {{ track.position }}</span></li>
