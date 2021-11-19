@@ -3,15 +3,31 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <h1>Inscrivez-vous !</h1>
 
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        <div class="alert alert-light">
+            <h2 class="h4">Renseignez vos informations</h2>
+                <div class="my-1">
+                    {{form_row(registrationForm.firstname, {'label':false})}}
+                </div>
+                <div class="my-1">
+                    {{form_row(registrationForm.lastname, {'label':false})}}
+                </div>
+                <div class="my-1">
+                    {{form_row(registrationForm.email, {'label':false})}}
+                </div>
+                <div class="my-1">
+                    {{form_row(registrationForm.photo, {'label':false})}}
+                </div>
+                <div class="my-1">
+                    {{form_row(registrationForm.plainPassword, {'label':false})}}
+                </div>
+                <div class="my-1">
+                    {{form_row(registrationForm.agreeTerms)}}
+                </div>
+        </div>
 
-        <button type="submit" class="btn">Register</button>
+        <button type="submit" class="btn btn-success">Enregistrer</button>
     {{ form_end(registrationForm) }}
 {% endblock %}
