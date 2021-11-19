@@ -3,25 +3,13 @@
 {% block title %}Hello AdminController!{% endblock %}
 
 {% block body %}
-    <ul>
-        <li>
-            <a href="{{ path('admin_artists') }}">Gérer les artistes</a>
-        </li>
+    <h1>Espace Administrateur</h1>
 
-        <li>
-            <a href="{{ path('admin_vinyls') }}">Gérer les vinyles</a>
-        </li>
-
-        <li>
-            <a href="{{ path('admin_albums') }}">Gérer les albums</a>
-        </li>
-
-        <li>
-            <a href="{{ path('admin_genres') }}">Gérer les genres</a>
-        </li>
-
-        <li>
-            <a href="{{ path('admin_tracks') }}">Gérer les tracks</a>
-        </li>
-    </ul>
+    <div class="mt-5">
+        <a href="{{ path('admin_artists') }}" class="btn btn-primary">Gérer les artistes</a>
+        <a href="{{ path('admin_vinyls') }}" class="btn btn-primary">Gérer les vinyles</a>
+        <a href="{{ path('admin_albums') }}" class="btn btn-primary">Gérer les albums</a>
+        <a href="{{ path('admin_genres') }}" class="btn btn-primary">Gérer les genres</a>
+        <a href="{{ path('admin_tracks') }}" class="btn btn-primary">Gérer les tracks</a>
+    </div>
 {% endblock %}

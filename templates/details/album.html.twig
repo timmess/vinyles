@@ -13,25 +13,28 @@
 
     {% if admin == true %}
         <div>
-            <a href="{{ path('updateAlbum',{id:album.id}) }}" class="btn btn-info">
+            <a href="{{ path('updateAlbum',{id:album.id}) }}" class="btn btn-primary my-2">
                 Mettre à jour {{ album.name }}
             </a>
         </div>
     {% endif %}
 
-    <ul class="list-group">
+    <ul class="list-group col-6 mb-3">
         <h2>Tracklist :</h2>
         {% for track in album.tracks %}
             <li class="list-group-item d-flex justify-content-between"><span>{{ track.title }} ({{ track.duration }} sec)</span>  <span>position : {{ track.position }}</span></li>
         {% endfor %}
+    </ul>
 
 
-        <h2>Vinyles issus de cet album :</h2>
-        {% if admin == true %}
-            <div><a href="{{ path('addVinylByAlbum', {id:album.id}) }}" class="btn btn-info my-2">Ajouter un vinyl</a></div>
-        {% endif %}
+    <h2>Vinyles issus de cet album :</h2>
+    {% if admin == true %}
+        <div><a href="{{ path('addVinylByAlbum', {id:album.id}) }}" class="btn btn-primary my-2">Ajouter un vinyl</a></div>
+    {% endif %}
+    <ul class="list-group col-6">
         {% for vinyl in album.vinyl %}
             <li class="list-group-item d-flex justify-content-between"><a href="{{ path('vinyl', {id: vinyl.id}) }}">{{ vinyl.title }} ({{ vinyl.releasedate | date("d/m/Y") }})</a></li>
         {% endfor %}
+    </ul>
     </ul>
 {% endblock %}
