@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use App\Repository\VinylRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,13 +18,23 @@ class ProfilController extends AbstractController
     /**
      * @Route("/profil/{id}", name="profil")
      */
-    public function index($id, UserRepository $repository, Request $request, PaginatorInterface $paginator): Response
+    public function index($id, UserRepository $repository): Response
+    {
+        $user = $repository->find($id);
+
+        return $this->render('profil/index.html.twig', [
+            'user'          => $user
+        ]);
+    }
+
+    /**
+     * @Route("/profil/{id}/collection", name="collection")
+     */
+    public function collection($id, UserRepository $repository, Request $request, PaginatorInterface $paginator): Response
     {
         $user = $repository->find($id);
 
         $user_vinyls = $user->getVinyls();
-        
-//        dd($user_vinyls);
 
         $user_vinyls = $paginator->paginate(
             $user_vinyls,
@@ -30,11 +42,12 @@ class ProfilController extends AbstractController
             10
         );
 
-        return $this->render('profil/index.html.twig', [
+        return $this->render('profil/collection.html.twig', [
             'user'          => $user,
             'user_vinyls'   => $user_vinyls
         ]);
     }
+
 
     /**
      * @Route("/updateUser/{id}", name="updateUser")
@@ -61,6 +74,25 @@ class ProfilController extends AbstractController
 
         return $this->render('forms/user_form.html.twig', [
             'form' => $update_user_form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/addVinylToUserCollection/{id}/{userId}", name="addVinylToUserCollection")
+     */
+    public function addVinylToUserCollection($userId, $id, VinylRepository $vinylRepository, UserRepository $userRepository, EntityManagerInterface $manager){
+        $vinyl = $vinylRepository->find($id);
+
+        $user = $userRepository->find($userId);
+
+        $user->addVinyl($vinyl);
+
+        $manager->persist($user);
+
+        $manager->flush();
+
+        return $this->redirectToRoute('collection', [
+            'id'    => $userId
         ]);
     }
 }

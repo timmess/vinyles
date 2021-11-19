@@ -5,13 +5,19 @@
 {% block body %}
     <h1>{{ vinyl.title }}</h1>
 
-<h2 class="h5">Genre : {% for genre in vinyl.genres %}<a href="{{ path('genre',{id:genre.id}) }}">{{ genre.name }}</a> {% if loop.last != true %} / {% endif %}{% endfor %}</h2>
+    <h2 class="h5">Genre : {% for genre in vinyl.genres %}<a href="{{ path('genre',{id:genre.id}) }}">{{ genre.name }}</a> {% if loop.last != true %} / {% endif %}{% endfor %}</h2>
 
-<h2><a href="{{ path('artist', {id: vinyl.artist.id}) }}">{{ vinyl.artist.name }}</a></h2>
+    <h2><a href="{{ path('artist', {id: vinyl.artist.id}) }}">{{ vinyl.artist.name }}</a></h2>
     <h3 class="h4">Date de sortie : {{ vinyl.releaseDate | date("d/m/Y") }}</h3>
     <h3 class="h5">Album : <a href="{{ path('album', {id:vinyl.album.id}) }}">{{ vinyl.album.name }}</a></h3>
 
     <img src="{{ vinyl.photo }}" alt="">
+
+    {% if app.user %}
+        <div>
+            <a href="{{ path('addVinylToUserCollection', {id:vinyl.id, userId: app.user.id}) }}" class="btn btn-primary">Ajouter ce vinyle à ma collection</a>
+        </div>
+    {% endif %}
 
     <ul class="list-group">
         <h2>Tracklist :</h2>
