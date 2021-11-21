@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Track;
 use App\Form\AddTrackType;
+use App\Repository\AlbumRepository;
 use App\Repository\TrackRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -64,6 +65,38 @@ class TrackController extends AbstractController
 
         return $this->render('forms/track_form.html.twig', [
             'form' => $update_track_form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/addTrackByAlbum/{id}", name="addTrackByAlbum")
+     */
+    public function addTrackByAlbum($id, EntityManagerInterface $manager, AlbumRepository $albumRepo, Request $request)
+    {
+        $track = new Track();
+
+        $album = $albumRepo->find($id);
+
+        $track->setAlbum($album);
+
+        $add_track_by_album_type = $this->createForm(AddTrackType::class, $track)->handleRequest($request);
+
+        if ($add_track_by_album_type->isSubmitted() && $add_track_by_album_type->isValid())
+        {
+            $track = $add_track_by_album_type->getData();
+
+            $manager->persist($track);
+
+            $manager->flush();
+
+            return $this->redirectToRoute('album', [
+                'id' => $id
+            ]);
+        }
+
+        return $this->render('forms/track_form.html.twig', [
+            'form' =>$add_track_by_album_type->createView(),
+            'album' => $album,
         ]);
     }
 

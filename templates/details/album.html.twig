@@ -21,6 +21,9 @@
 
     <ul class="list-group col-6 mb-3">
         <h2>Tracklist :</h2>
+        {% if admin == true %}
+            <div><a href="{{ path('addTrackByAlbum', {id:album.id}) }}" class="btn btn-primary my-2">Ajouter une chanson</a></div>
+        {% endif %}
         {% for track in album.tracks %}
             <li class="list-group-item d-flex justify-content-between"><span>{{ track.title }} ({{ track.duration }} sec)</span>  <span>position : {{ track.position }}</span></li>
         {% endfor %}
@@ -31,9 +34,9 @@
     {% if admin == true %}
         <div><a href="{{ path('addVinylByAlbum', {id:album.id}) }}" class="btn btn-primary my-2">Ajouter un vinyl</a></div>
     {% endif %}
-    <ul class="list-group col-6">
+    <ul class="list-group col-6 mb-2">
         {% for vinyl in album.vinyl %}
-            <li class="list-group-item d-flex justify-content-between"><a href="{{ path('vinyl', {id: vinyl.id}) }}">{{ vinyl.title }} ({{ vinyl.releasedate | date("d/m/Y") }})</a></li>
+            <li class="list-group-item d-flex justify-content-between"><a class="text-dark primary-hover text-decoration-none" href="{{ path('vinyl', {id: vinyl.id}) }}">{{ vinyl.title }} ({{ vinyl.releasedate | date("d/m/Y") }})</a></li>
         {% endfor %}
     </ul>
 {% endblock %}

@@ -76,6 +76,6 @@ class GenreController extends AbstractController
         $manager->remove($genre);
         $manager->flush();
 
-        return $this->redirectToRoute('admin_genres');
+        return $this->redirectToRoute('genres');
     }
 }

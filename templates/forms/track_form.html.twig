@@ -6,7 +6,7 @@
     {{ form_start(form) }}
 
     <div class="alert alert-light">
-        <h2 class="h4">Ajouter un album</h2>
+        <h2 class="h4">Ajouter une chanson à {{ album.name }} de {{ album.artist.name }}</h2>
         <div class="row">
             <div class="col">
                 {{form_row(form.title)}}

@@ -70,40 +70,6 @@ class AlbumController extends AbstractController
     }
 
     /**
-     * @Route("/addVinylByAlbum/{id}", name="addVinylByAlbum")
-     */
-    public function addVinylByAlbum($id, EntityManagerInterface $manager, AlbumRepository $albumRepo, Request $request)
-    {
-        $vinyl = new Vinyl();
-
-        $album = $albumRepo->find($id);
-
-        $vinyl  ->setAlbum($album)
-                ->setTitle($album->getName())
-                ->setPhoto(($album->getPhoto()))
-                ->setArtist($album->getArtist());
-
-        $add_vinyl_by_album_type = $this->createForm(AddVinyleType::class, $vinyl)->handleRequest($request);
-
-        if ($add_vinyl_by_album_type->isSubmitted() && $add_vinyl_by_album_type->isValid())
-        {
-            $vinyl = $add_vinyl_by_album_type->getData();
-
-            $manager->persist($vinyl);
-
-            $manager->flush();
-
-            return $this->redirectToRoute('album', [
-                'id' => $id
-            ]);
-        }
-
-        return $this->render('forms/vinyl_form.html.twig', [
-            'form' =>$add_vinyl_by_album_type->createView()
-        ]);
-    }
-
-    /**
      * @Route("/deleteAlbum/{id}", name="deleteAlbum")
      */
     public function delete($id, EntityManagerInterface $manager, AlbumRepository $repo){

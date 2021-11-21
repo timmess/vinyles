@@ -8,6 +8,7 @@ use App\Entity\Genre;
 use App\Entity\Vinyl;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,7 +19,9 @@ class AddVinyleType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('release_date')
+            ->add('release_date', DateType::class, [
+                'widget' => 'single_text',
+            ])
             ->add('photo')
             ->add('artist', EntityType::class, [
                 'class' => Artist::class,

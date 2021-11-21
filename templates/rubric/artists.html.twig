@@ -13,14 +13,21 @@
                 <h2><a href="{{ path('artist', {id: artist.id}) }}" class="text-dark primary-hover text-decoration-none">{{ artist.name }}</a></h2>
                 <hr/>
                 <div class="text-center">
-                    <img src="{{ artist.photo }}" alt="{{ artist.name }}" class="w-75 border mh-23">
+                    <a href="{{ path('artist', {id:artist.id}) }}"><img src="{{ artist.photo }}" alt="{{ artist.name }}" class="w-75 border h-21"></a>
                 </div>
-                <p>Genre{% if artist.genres | length > 1 %}s{% endif%} : {% for genre in artist.genres %}<a href="{{ path('genre', {id:genre.id}) }}">{{ genre.name }}</a>{% endfor %}</p>
+                <p>Genre{% if artist.genres | length > 1 %}s{% endif%} : {% for genre in artist.genres %}<a href="{{ path('genre', {id:genre.id}) }}">{{ genre.name }}</a>{% if artist.genres | length > 1 and loop.last != true %}, {% endif%}{% endfor %}</p>
                 <p class="h2 text-decoration-underline">Albums :</p>
                 <ul class="list-group my-2">
-                    {% for album in artist.albums %}
-                        <li class="list-group-item"><h3><a href="{{ path('album', {id: album.id}) }}" class="text-decoration-none text-dark primary-hover ">{{ album.name | capitalize}}</a></h3></li>
-                    {% endfor %}
+                    {% if artist.albums | length > 0 %}
+                        {% for album in artist.albums %}
+                            <li class="list-group-item"><h3><a href="{{ path('album', {id: album.id}) }}" class="text-decoration-none text-dark primary-hover ">{{ album.name | capitalize}}</a></h3></li>
+                        {% endfor %}
+                    {% else %}
+                        <p class="h3">Aucun album ajouté</p>
+                        {% if admin == true %}
+                            <div><a href="{{ path('addAlbumByArtist', {id:artist.id}) }}" class="btn btn-info my-2">Ajouter un album</a></div>
+                        {% endif %}
+                    {% endif %}
                 </ul>
             </div>
         {% endfor %}

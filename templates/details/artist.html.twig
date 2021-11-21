@@ -7,7 +7,7 @@
     {% if admin == true %}
         <div class="my-2"><a href="{{ path('updateArtist', {id:artist.id}) }}" class="btn btn-info">Mettre à jour {{ artist.name }}</a></div>
     {% endif %}
-    <img src="{{ artist.photo }}" alt="">
+    <img src="{{ artist.photo }}" alt="" class="w-100">
     
     <h2>Genres</h2>
     <ul class="list-group">

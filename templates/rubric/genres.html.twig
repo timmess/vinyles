@@ -11,11 +11,18 @@
         {% for genre in genres %}
             <div class="col-6 border">
                 <h2><a class="h1 text-dark text-decoration-none primary-hover " href="{{ path('genre', {id: genre.id}) }}">{{ genre.name | capitalize }}</a></h2>
+                {% if admin %}
+                    <a href="{{ path('deleteGenre', {id: genre.id}) }}" class="btn btn-danger">Supprimer</a>
+                {% endif %}
                 <hr/>
-                <p class="h3 text-decoration-underline">Artistes :</p>
-                {% for artist in genre.artists %}
-                    <h3 class="h4"><a href="{{ path('artist', {id: artist.id}) }}" class="text-decoration-none">{{ artist.name }}</a></h3>
-                {% endfor %}
+                {% if genre.artists | length > 0 %}
+                    <p class="h3 text-decoration-underline">Artistes :</p>
+                    {% for artist in genre.artists %}
+                        <h3 class="h4"><a href="{{ path('artist', {id: artist.id}) }}" class="text-decoration-none">{{ artist.name }}</a></h3>
+                    {% endfor %}
+                {% else %}
+                <p class="h3">Ce genre n'a pas encore d'artiste</p>
+            {% endif %}
             </div>
         {% endfor %}
         <div class="pagination my-2">
