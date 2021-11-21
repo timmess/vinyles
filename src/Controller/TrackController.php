@@ -51,6 +51,8 @@ class TrackController extends AbstractController
 
         $update_track_form->handleRequest($request);
 
+        $album = $track->getAlbum();
+
         if ($update_track_form->isSubmitted() && $update_track_form->isValid()){
             $track = $update_track_form->getData();
 
@@ -65,6 +67,7 @@ class TrackController extends AbstractController
 
         return $this->render('forms/track_form.html.twig', [
             'form' => $update_track_form->createView(),
+            'album' => $album
         ]);
     }
 
