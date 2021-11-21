@@ -9,7 +9,7 @@
 
     <h2 class="h5">Genre : {% for genre in album.genres %}<a href="{{ path('genre',{id:genre.id}) }}">{{ genre.name }}</a> {% if loop.last != true %} / {% endif %}{% endfor %}</h2>
 
-    <img src="{{ album.photo }}" alt="">
+    <img src="{{ album.photo }}" alt="" class="mh-23">
 
     {% if admin == true %}
         <div>
