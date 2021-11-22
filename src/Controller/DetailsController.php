@@ -18,8 +18,14 @@ class DetailsController extends AbstractController
      */
     public function vinylDetail(VinylRepository $repo, $id): Response
     {
+        $user = false;
+        $userVinyls = null;
+
         $vinyl = $repo->find($id);
-        $userVinyls = $this->getUser()->getVinyls();
+
+        if ($this->getUser()){
+            $userVinyls = $this->getUser()->getVinyls();
+        }
 
         return $this->render('details/vinyl.html.twig', [
             'vinyl' => $vinyl,

@@ -7,6 +7,7 @@ use App\Entity\Vinyl;
 use App\Form\AddAlbumType;
 use App\Form\AddVinyleType;
 use App\Repository\AlbumRepository;
+use App\Repository\ArtistRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -60,12 +61,13 @@ class AlbumController extends AbstractController
             $manager->flush();
 
             return $this->redirectToRoute('album', [
-                'id'    => $id
+                'id'    => $id,
             ]);
         }
 
         return $this->render('forms/album_form.html.twig', [
             'form' => $update_album_form->createView(),
+            'album' => $album,
         ]);
     }
 
@@ -78,6 +80,39 @@ class AlbumController extends AbstractController
         $manager->remove($album);
         $manager->flush();
 
-        return $this->redirectToRoute('admin_artists');
+        return $this->redirectToRoute('artist', [
+            'id' => $album->getArtist()->getId()
+        ]);
+    }
+
+    /**
+     * @Route("/addAlbumByArtist/{id}", name="addAlbumByArtist")
+     */
+    public function addAlbumByArtist($id, EntityManagerInterface $manager, ArtistRepository $artistRepo, Request $request)
+    {
+        $album = new Album();
+
+        $artist = $artistRepo->find($id);
+        $album->setArtist($artist);
+
+        $add_album_by_artist_type = $this->createForm(AddAlbumType::class, $album)->handleRequest($request);
+
+        if ($add_album_by_artist_type->isSubmitted() && $add_album_by_artist_type->isValid())
+        {
+            $album = $add_album_by_artist_type->getData();
+
+            $manager->persist($album);
+
+            $manager->flush();
+
+            return $this->redirectToRoute('album', [
+                'id' => $album->getId()
+            ]);
+        }
+
+        return $this->render('forms/album_by_artist_form.html.twig', [
+            'form' =>$add_album_by_artist_type->createView(),
+            'artist' => $artist,
+        ]);
     }
 }

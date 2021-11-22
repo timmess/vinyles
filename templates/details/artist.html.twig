@@ -7,7 +7,7 @@
     {% if admin == true %}
         <div class="my-2"><a href="{{ path('updateArtist', {id:artist.id}) }}" class="btn btn-info">Mettre à jour {{ artist.name }}</a></div>
     {% endif %}
-    <img src="{{ artist.photo }}" alt="" class="w-100">
+    <img src="{{ artist.photo }}" alt="" class="mh-23">
     
     <h2>Genres</h2>
     <ul class="list-group">
@@ -18,11 +18,27 @@
 
     <h2>Albums :</h2>
     {% if admin == true %}
-        <div><a href="{{ path('addAlbumByArtist', {id:artist.id}) }}" class="btn btn-info my-2">Ajouter un album</a></div>
+        <div><a href="{{ path('addAlbumByArtist', {id:artist.id}) }}" class="btn btn-info mb-3">Ajouter un album</a></div>
     {% endif %}
-    <ul class="list-group">
+    <ul class="list-group mb-3">
         {% for album in artist.albums %}
-            <li class="list-group-item"><a href="{{ path('album', {id: album.id}) }}">{{ album.name }} </a></li>
+            <li class="list-group-item">
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="{{ path('album', {id: album.id}) }}">
+                        {{ album.name }}
+                    </a>
+                    <div>
+                        {% if admin %}
+                            <a href="{{ path('updateAlbum', {id:album.id}) }}" class="btn btn-primary text-end">
+                                <i class="fas fa-pen"></i>
+                            </a>
+                            <a href="{{ path('deleteAlbum', {id:album.id}) }}" class="fw-bold btn btn-danger text-end">
+                                X
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </li>
         {% endfor %}
     </ul>
 {% endblock %}

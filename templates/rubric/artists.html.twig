@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Nos Artistes</h1>
     {% if admin %}
-        <a class="btn btn-info mb-3" href="{{ path('add_artist') }}">Ajouter un artiste</a>
+        <a class="btn btn-info" href="{{ path('add_artist') }}">Ajouter un artiste</a>
     {% endif %}
     <div class="row">
         {% for artist in artists %}

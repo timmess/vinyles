@@ -109,8 +109,9 @@ class VinylController extends AbstractController
             ]);
         }
 
-        return $this->render('forms/vinyl_form.html.twig', [
-            'form' =>$add_vinyl_by_album_type->createView()
+        return $this->render('forms/vinyl_by_artist_form.html.twig', [
+            'form' =>$add_vinyl_by_album_type->createView(),
+            'album'=> $album
         ]);
     }
 }

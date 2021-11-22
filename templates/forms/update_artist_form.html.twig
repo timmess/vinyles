@@ -6,7 +6,8 @@
     {{ form_start(form) }}
 
     <div class="alert alert-light">
-        <h2 class="h4">Ajouter un artiste</h2>
+        <h2 class="h4">Mettre à jour {{ artist.name }}</h2>
+        <img src="{{ artist.photo }}" alt="" class="mh-23 my-3">
         <div class="row">
             <div class="col">
                 {{form_row(form.name)}}

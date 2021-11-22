@@ -6,13 +6,22 @@
     {{ form_start(form) }}
 
     <div class="alert alert-light">
-        <h2 class="h4">Ajouter un artiste</h2>
+        <h2 class="h4">Ajouter un vinyle {{ album.name }} de {{ album.artist.name }}</h2>
         <div class="row">
+            <div class="col d-none">
+                {{form_row(form.title)}}
+            </div>
             <div class="col">
-                {{form_row(form.name)}}
+                {{form_row(form.release_date)}}
             </div>
             <div class="col">
                 {{form_row(form.photo)}}
+            </div>
+            <div class="col d-none">
+                {{form_row(form.artist)}}
+            </div>
+            <div class="col d-none">
+                {{form_row(form.album)}}
             </div>
             <div class="col">
                 {{form_row(form.genres)}}

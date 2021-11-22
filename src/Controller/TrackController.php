@@ -93,7 +93,8 @@ class TrackController extends AbstractController
             $manager->flush();
 
             return $this->redirectToRoute('album', [
-                'id' => $id
+                'id' => $id,
+                'album' => $album
             ]);
         }
 
@@ -108,10 +109,13 @@ class TrackController extends AbstractController
      */
     public function delete($id, EntityManagerInterface $manager, TrackRepository $repo){
         $track = $repo->find($id);
+        $albumId = $track->getAlbum()->getId();
 
         $manager->remove($track);
         $manager->flush();
 
-        return $this->redirectToRoute('admin_tracks');
+        return $this->redirectToRoute('album', [
+            'id' => $albumId
+        ]);
     }
 }

@@ -7,17 +7,26 @@
 
     <div class="alert alert-light">
         <h2 class="h4">Ajouter une chanson à {{ album.name }} de {{ album.artist.name }}</h2>
+        <img src="{{ album.photo }}" alt="{{ album.name }}" class="mh-23 my-3">
+        {% if album.tracks | length > 0 %}
+            <p class="h5">Chanson{% if album.tracks | length > 1%}s{% endif %} déjà existante :</p>
+        {% endif %}
+        <ul>
+            {% for track in album.tracks %}
+                <li>{{ track.position }} - {{ track.title }}</li>
+            {% endfor %}
+        </ul>
         <div class="row">
-            <div class="col">
+            <div class="my-2">
                 {{form_row(form.title)}}
             </div>
-            <div class="col">
+            <div class="my-2">
                 {{form_row(form.position)}}
             </div>
-            <div class="col">
+            <div class="my-2">
                 {{form_row(form.duration)}}
             </div>
-            <div class="col">
+            <div class="col d-none my-3">
                 {{form_row(form.album)}}
             </div>
         </div>

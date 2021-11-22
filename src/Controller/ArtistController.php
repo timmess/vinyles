@@ -64,38 +64,9 @@ class ArtistController extends AbstractController
             ]);
         }
 
-        return $this->render('forms/artist_form.html.twig', [
-            'form' => $update_artist_form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/addAlbumByArtist/{id}", name="addAlbumByArtist")
-     */
-    public function addAlbumByArtist($id, EntityManagerInterface $manager, ArtistRepository $artistRepo, Request $request)
-    {
-        $album = new Album();
-
-        $artist = $artistRepo->find($id);
-        $album->setArtist($artist);
-
-        $add_album_by_artist_type = $this->createForm(AddAlbumType::class, $album)->handleRequest($request);
-
-        if ($add_album_by_artist_type->isSubmitted() && $add_album_by_artist_type->isValid())
-        {
-            $album = $add_album_by_artist_type->getData();
-
-            $manager->persist($album);
-
-            $manager->flush();
-
-            return $this->redirectToRoute('artist', [
-                'id' => $id
-            ]);
-        }
-
-        return $this->render('forms/album_form.html.twig', [
-            'form' =>$add_album_by_artist_type->createView()
+        return $this->render('forms/update_artist_form.html.twig', [
+            'form'      => $update_artist_form->createView(),
+            'artist'    => $artist
         ]);
     }
 
