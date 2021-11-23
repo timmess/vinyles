@@ -39,10 +39,10 @@
                     <div>{{ track.title }} ({{ track.duration }} sec)</div>
                     <div>position : {{ track.position }}
                         {% if admin %}
-                            <a href="{{ path('updateTrack', {id:track.id}) }}" class="btn btn-primary text-end">
+                            <a href="{{ path('updateTrack', {id:track.id}) }}" class="btn btn-primary fs-6">
                                 <i class="fas fa-pen"></i>
                             </a>
-                            <a href="{{ path('deleteTrack', {id:track.id}) }}" class="fw-bold btn btn-danger text-end">
+                            <a href="{{ path('deleteTrack', {id:track.id}) }}" class="fw-bold btn btn-danger">
                                 X
                             </a>
                         {% endif %}
@@ -65,6 +65,16 @@
                 <a class="text-dark primary-hover text-decoration-none" href="{{ path('vinyl', {id: vinyl.id}) }}">
                     {{ vinyl.title }} ({{ vinyl.releasedate | date("d/m/Y") }})
                 </a>
+                {% if admin %}
+                    <div>
+                        <a href="{{ path('update_vinyl', {id:vinyl.id}) }}" class="btn btn-primary text-end">
+                            <i class="fas fa-pen"></i>
+                        </a>
+                        <a href="{{ path('deleteVinyl', {id:vinyl.id}) }}" class="fw-bold btn btn-danger text-end">
+                            X
+                        </a>
+                    </div>
+                {% endif %}
             </li>
         {% endfor %}
     </ul>

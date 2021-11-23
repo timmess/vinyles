@@ -97,7 +97,9 @@ class VinylController extends AbstractController
             'Le vinyl ' . $vinyl->getTitle() . ' de ' . $vinyl->getArtist()->getName() . ' a bien été supprimé !'
         );
 
-        return $this->redirectToRoute('admin_vinyls');
+        return $this->redirectToRoute('album', [
+            'id' => $vinyl->getAlbum()->getId()
+        ]);
     }
 
     /**
