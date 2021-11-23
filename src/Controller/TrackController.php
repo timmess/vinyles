@@ -30,6 +30,11 @@ class TrackController extends AbstractController
 
             $manager->flush();
 
+            $this->addFlash(
+                'success',
+                'La chanson ' . $track->getName() . ' de ' . $track->getArtist()->getName() . 'a bien été ajoutée !'
+            );
+
             return $this->redirectToRoute('track', [
                 'id' => $track->getId(),
             ]);
@@ -92,6 +97,11 @@ class TrackController extends AbstractController
 
             $manager->flush();
 
+            $this->addFlash(
+                'success',
+                'La chanson ' . $track->getTitle() . 'de ' . $track->getAlbum()->getArtist()->getName() . ' a bien été ajoutée sur l\'album ' . $track->getAlbum()->getName() . ' !'
+            );
+
             return $this->redirectToRoute('album', [
                 'id' => $id,
                 'album' => $album
@@ -113,6 +123,11 @@ class TrackController extends AbstractController
 
         $manager->remove($track);
         $manager->flush();
+
+        $this->addFlash(
+            'success',
+            'La chanson ' . $track->getTitle() . ' de ' . $track->getAlbum()->getArtist()->getName() . ' sur l\'album ' . $track->getAlbum()->getName() . ' a bien été supprimée !'
+        );
 
         return $this->redirectToRoute('album', [
             'id' => $albumId

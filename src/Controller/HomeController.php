@@ -16,7 +16,7 @@ class HomeController extends AbstractController
     {
         $user = $this->getUser();
 
-        $last_vinyls = $vinylRepo->findLastsVinyls(4);
+        $last_vinyls = $vinylRepo->findLastsVinyls(3);
 
         return $this->render('home/index.html.twig', [
             'user'          => $user,

@@ -31,6 +31,11 @@ class ArtistController extends AbstractController
 
             $manager->flush();
 
+            $this->addFlash(
+                'success',
+                $artist->getName() . 'a bien été ajouté !'
+            );
+
             return $this->redirectToRoute('artist', [
                'id' => $artist->getId(),
             ]);
@@ -59,6 +64,11 @@ class ArtistController extends AbstractController
 
             $manager->flush();
 
+            $this->addFlash(
+                'success',
+                $artist->getName() . 'a bien été modifié !'
+            );
+
             return $this->redirectToRoute('artist', [
                 'id'    => $id
             ]);
@@ -78,6 +88,11 @@ class ArtistController extends AbstractController
 
         $manager->remove($artist);
         $manager->flush();
+
+        $this->addFlash(
+            'success',
+            $artist->getName() . 'a bien été supprimé !'
+        );
 
         return $this->redirectToRoute('admin_artists');
     }

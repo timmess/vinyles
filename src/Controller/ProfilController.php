@@ -66,6 +66,11 @@ class ProfilController extends AbstractController
 
             $manager->flush();
 
+            $this->addFlash(
+                'success',
+                'Votre profil a bien été modifié !'
+            );
+
             return $this->redirectToRoute('profil', [
                 'id'    => $id
             ]);
@@ -73,25 +78,6 @@ class ProfilController extends AbstractController
 
         return $this->render('forms/user_form.html.twig', [
             'form' => $update_user_form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/addVinylToUserCollection/{id}/{userId}", name="addVinylToUserCollection")
-     */
-    public function addVinylToUserCollection($userId, $id, VinylRepository $vinylRepository, UserRepository $userRepository, EntityManagerInterface $manager){
-        $vinyl = $vinylRepository->find($id);
-
-        $user = $userRepository->find($userId);
-
-        $user->addVinyl($vinyl);
-
-        $manager->persist($user);
-
-        $manager->flush();
-
-        return $this->redirectToRoute('collection', [
-            'id'    => $userId
         ]);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Vinyl;
 use App\Form\AddVinyleType;
 use App\Repository\AlbumRepository;
+use App\Repository\UserRepository;
 use App\Repository\VinylRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,13 +31,19 @@ class VinylController extends AbstractController
 
             $manager->flush();
 
+            $this->addFlash(
+                'success',
+                'Le vinyl ' . $vinyl->getTitle() . ' de ' . $vinyl->getArtist()->getName() . 'a bien été ajouté !'
+            );
+
             return $this->redirectToRoute('vinyl', [
                 'id' => $vinyl->getId(),
             ]);
         }
 
         return $this->render('forms/vinyl_form.html.twig', [
-            'form' =>$new_vinyl_form->createView()
+            'form' =>$new_vinyl_form->createView(),
+            'title' => 'Ajouter un vinyl'
         ]);
     }
 
@@ -58,13 +65,21 @@ class VinylController extends AbstractController
 
             $manager->flush();
 
+            $this->addFlash(
+                'success',
+                'Le vinyl ' . $vinyl->getTitle() . ' de ' . $vinyl->getArtist()->getName() . ' a bien été modifié !'
+            );
+
             return $this->redirectToRoute('vinyl', [
                 'id'    => $id
             ]);
         }
 
-        return $this->render('admin/forms/form.html.twig', [
+        $title = "Mettre à jour " . $vinyl->getTitle();
+
+        return $this->render('forms/vinyl_form.html.twig', [
             'form' => $update_vinyl_form->createView(),
+            'title' => $title
         ]);
     }
 
@@ -76,6 +91,11 @@ class VinylController extends AbstractController
 
         $manager->remove($vinyl);
         $manager->flush();
+
+        $this->addFlash(
+            'success',
+            'Le vinyl ' . $vinyl->getTitle() . ' de ' . $vinyl->getArtist()->getName() . ' a bien été supprimé !'
+        );
 
         return $this->redirectToRoute('admin_vinyls');
     }
@@ -104,6 +124,11 @@ class VinylController extends AbstractController
 
             $manager->flush();
 
+            $this->addFlash(
+                'success',
+                'Le vinyl de ' . $vinyl->getArtist()->getName() . ' a bien été ajouté à l\'album ' . $vinyl->getAlbum()->getName() . ' !'
+            );
+
             return $this->redirectToRoute('album', [
                 'id' => $id
             ]);
@@ -112,6 +137,25 @@ class VinylController extends AbstractController
         return $this->render('forms/vinyl_by_artist_form.html.twig', [
             'form' =>$add_vinyl_by_album_type->createView(),
             'album'=> $album
+        ]);
+    }
+
+    /**
+     * @Route("/addVinylToUserCollection/{id}/{userId}", name="addVinylToUserCollection")
+     */
+    public function addVinylToUserCollection($userId, $id, VinylRepository $vinylRepository, UserRepository $userRepository, EntityManagerInterface $manager){
+        $vinyl = $vinylRepository->find($id);
+
+        $user = $userRepository->find($userId);
+
+        $user->addVinyl($vinyl);
+
+        $manager->persist($user);
+
+        $manager->flush();
+
+        return $this->redirectToRoute('collection', [
+            'id'    => $userId
         ]);
     }
 }

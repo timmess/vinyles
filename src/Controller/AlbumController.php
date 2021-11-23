@@ -32,6 +32,11 @@ class AlbumController extends AbstractController
 
             $manager->flush();
 
+            $this->addFlash(
+                'success',
+                'L\'album ' . $album->getName() . ' de ' . $album->getArtist()->getName() . 'a bien été ajouté !'
+            );
+
             return $this->redirectToRoute('album', [
                 'id' => $album->getId(),
             ]);
@@ -60,6 +65,11 @@ class AlbumController extends AbstractController
 
             $manager->flush();
 
+            $this->addFlash(
+                'success',
+                'L\'album ' . $album->getName() . ' de ' . $album->getArtist()->getName() . 'a bien été mis à jour !'
+            );
+
             return $this->redirectToRoute('album', [
                 'id'    => $id,
             ]);
@@ -79,6 +89,11 @@ class AlbumController extends AbstractController
 
         $manager->remove($album);
         $manager->flush();
+
+        $this->addFlash(
+            'success',
+            'L\'album ' . $album->getName() .  'a bien été supprimé !'
+        );
 
         return $this->redirectToRoute('artist', [
             'id' => $album->getArtist()->getId()
@@ -104,6 +119,11 @@ class AlbumController extends AbstractController
             $manager->persist($album);
 
             $manager->flush();
+
+            $this->addFlash(
+                'success',
+                'L\'album ' . $album->getName() . 'a bien été ajouté à ' . $artist->getName() . ' !'
+            );
 
             return $this->redirectToRoute('album', [
                 'id' => $album->getId()

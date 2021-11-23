@@ -29,13 +29,19 @@ class GenreController extends AbstractController
 
             $manager->flush();
 
+            $this->addFlash(
+                'success',
+                $genre->getName() . 'a bien été ajouté !'
+            );
+
             return $this->redirectToRoute('genre', [
                 'id' => $genre->getId(),
             ]);
         }
 
         return $this->render('forms/genre_form.html.twig', [
-            'form' =>$new_genre_form->createView()
+            'form' =>$new_genre_form->createView(),
+            'title' => 'Ajouter un genre'
         ]);
     }
 
@@ -57,13 +63,21 @@ class GenreController extends AbstractController
 
             $manager->flush();
 
+            $this->addFlash(
+                'success',
+                $genre->getName() . 'a bien été modifié !'
+            );
+
             return $this->redirectToRoute('genre', [
                 'id'    => $id
             ]);
         }
 
+        $title = "Mettre à jour " . $genre->getName();
+
         return $this->render('forms/genre_form.html.twig', [
             'form' => $update_genre_form->createView(),
+            'title' => $title
         ]);
     }
 
@@ -75,6 +89,11 @@ class GenreController extends AbstractController
 
         $manager->remove($genre);
         $manager->flush();
+
+        $this->addFlash(
+            'success',
+            $genre->getName() . ' a bien été supprimé !'
+        );
 
         return $this->redirectToRoute('genres');
     }
