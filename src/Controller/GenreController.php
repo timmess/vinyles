@@ -31,7 +31,7 @@ class GenreController extends AbstractController
 
             $this->addFlash(
                 'success',
-                $genre->getName() . 'a bien été ajouté !'
+                'Le genre ' . $genre->getName() . ' a bien été ajouté !'
             );
 
             return $this->redirectToRoute('genre', [
@@ -65,7 +65,7 @@ class GenreController extends AbstractController
 
             $this->addFlash(
                 'success',
-                $genre->getName() . 'a bien été modifié !'
+                'Le genre ' . $genre->getName() . ' a bien été modifié !'
             );
 
             return $this->redirectToRoute('genre', [
@@ -92,7 +92,7 @@ class GenreController extends AbstractController
 
         $this->addFlash(
             'success',
-            $genre->getName() . ' a bien été supprimé !'
+            'Le genre ' . $genre->getName() . ' a bien été supprimé !'
         );
 
         return $this->redirectToRoute('genres');

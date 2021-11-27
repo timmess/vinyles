@@ -3,17 +3,6 @@
 {% block title %}Vinylium{% endblock %}
 
 {% block body %}
-    <div class="row">
-        <h1 class="text-primary">Vinylium</h1>
-    </div>
-
-    {% if app.user %}
-        <p>Bonjour {{ user.firstname }} {{ user.lastname }}</p>
-    {% else %}
-        <p>Envie de créer ta collection ? Rien de plus simple, <a href="{{ path('app_register') }}">inscris toi</a> !</p>
-        <p>Déja inscris ? <a href="{{ path('app_login') }}">Connectes toi</a> !</p>
-    {% endif %}
-
     <div class="row border">
         <h2>Nos derniers vinyls ajoutés :</h2>
         {% for vinyl in last_vinyls %}
@@ -24,5 +13,4 @@
             </div>
         {% endfor %}
     </div>
-
 {% endblock %}

@@ -24,7 +24,7 @@
                         {% endfor %}
                     {% else %}
                         <p class="h3">Aucun album ajouté</p>
-                        {% if admin == true %}
+                        {% if admin %}
                             <div><a href="{{ path('addAlbumByArtist', {id:artist.id}) }}" class="btn btn-info my-2">Ajouter un album</a></div>
                         {% endif %}
                     {% endif %}

@@ -16,7 +16,7 @@
 
     <img src="{{ album.photo }}" alt="" class="mh-23">
 
-    {% if admin == true %}
+    {% if admin %}
         <div>
             <a href="{{ path('updateAlbum',{id:album.id}) }}" class="btn btn-primary my-2">
                 Mettre à jour {{ album.name }}
@@ -26,7 +26,7 @@
 
     <ul class="list-group col-6 mb-3">
         <h2>Tracklist :</h2>
-        {% if admin == true %}
+        {% if admin %}
             <div>
                 <a href="{{ path('addTrackByAlbum', {id:album.id}) }}" class="btn btn-primary my-2">
                     Ajouter une chanson
@@ -54,7 +54,7 @@
 
 
     <h2>Vinyles issus de cet album :</h2>
-    {% if admin == true %}
+    {% if admin %}
         <div>
             <a href="{{ path('addVinylByAlbum', {id:album.id}) }}" class="btn btn-primary my-2">Ajouter un vinyl</a>
         </div>
