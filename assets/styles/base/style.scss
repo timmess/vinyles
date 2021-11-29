@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 .mh-15{
   max-height: 15rem!important;
 }
@@ -46,4 +48,8 @@ body{
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.navbar{
+  min-height: 4rem;
 }
