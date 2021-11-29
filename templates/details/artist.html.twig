@@ -16,6 +16,9 @@
         {% endfor %}
     </ul>
 
+    <h2>Description</h2>
+    <p class="bg-white p-1">{{ artist.description }}</p>
+
     <h2>Albums :</h2>
     {% if admin %}
         <div><a href="{{ path('addAlbumByArtist', {id:artist.id}) }}" class="btn btn-info mb-3">Ajouter un album</a></div>

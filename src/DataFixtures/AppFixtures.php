@@ -76,7 +76,8 @@ class AppFixtures extends Fixture
 
             $artist ->setName($faker->name)
                     ->setPhoto('https://via.placeholder.com/450')
-                    ->addGenre($genres[$r]);
+                    ->addGenre($genres[$r])
+                    ->setDescription($faker->paragraph);
             $r = rand(0,3);
             $artist->addGenre($genres[$r]);
 
@@ -85,7 +86,7 @@ class AppFixtures extends Fixture
             for ($e = $f; $e <= 3; $e++) {
                 $album = new Album();
                 $album  ->setName($faker->word)
-                    ->setPhoto('https://via.placeholder.com/450')
+                        ->setPhoto('https://via.placeholder.com/450')
                         ->addGenre($artist->getGenres()[0]);
 
                 //Tracks loop
