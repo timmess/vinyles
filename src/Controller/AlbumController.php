@@ -67,7 +67,7 @@ class AlbumController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'L\'album ' . $album->getName() . ' de ' . $album->getArtist()->getName() . 'a bien été mis à jour !'
+                'L\'album ' . $album->getName() . ' de ' . $album->getArtist()->getName() . ' a bien été mis à jour !'
             );
 
             return $this->redirectToRoute('album', [

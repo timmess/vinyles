@@ -35,6 +35,12 @@ class ProfilController extends AbstractController
 
         $user_vinyls = $user->getVinyls();
 
+        $collection_price = 0;
+
+        foreach ($user_vinyls as $vinyl){
+            $collection_price = $collection_price + $vinyl->getPrice();
+        }
+
         $user_vinyls = $paginator->paginate(
             $user_vinyls,
             $request->query->getInt('page', 1),
@@ -42,8 +48,9 @@ class ProfilController extends AbstractController
         );
 
         return $this->render('profil/collection.html.twig', [
-            'user'          => $user,
-            'user_vinyls'   => $user_vinyls
+            'user'              => $user,
+            'user_vinyls'       => $user_vinyls,
+            'collection_price'  => $collection_price
         ]);
     }
 

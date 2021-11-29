@@ -6,6 +6,7 @@
 
 <div>
     <h1>Ma collection de vinyl :</h1>
+    <p>Prix de ma collection : {{ collection_price }} euros.</p>
     {% if app.user.vinyls | length > 0 %}
         <ul class="list-group">
             {% for vinyl in user_vinyls %}

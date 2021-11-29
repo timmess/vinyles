@@ -59,6 +59,16 @@ class Vinyl
      */
     private $users;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $price;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $pressing_number;
+
     public function __construct()
     {
         $this->tracks = new ArrayCollection();
@@ -211,6 +221,30 @@ class Vinyl
         if ($this->users->removeElement($user)) {
             $user->removeVinyl($this);
         }
+
+        return $this;
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(?float $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getPressingNumber(): ?string
+    {
+        return $this->pressing_number;
+    }
+
+    public function setPressingNumber(string $pressing_number): self
+    {
+        $this->pressing_number = $pressing_number;
 
         return $this;
     }

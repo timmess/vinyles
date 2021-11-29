@@ -3,13 +3,22 @@
 {% block title %}{{ vinyl.artist.name }} - {{ vinyl.title }}{% endblock %}
 
 {% block body %}
-    <h1>{{ vinyl.title }}</h1>
+    <h1>{{ vinyl.title }} - {{ vinyl.pressingNumber }}</h1>
 
     <h2 class="h5">Genre : {% for genre in vinyl.genres %}<a href="{{ path('genre',{id:genre.id}) }}">{{ genre.name }}</a> {% if loop.last != true %} / {% endif %}{% endfor %}</h2>
 
     <h2><a href="{{ path('artist', {id: vinyl.artist.id}) }}">{{ vinyl.artist.name }}</a></h2>
     <h3 class="h4">Date de sortie : {{ vinyl.releaseDate | date("d/m/Y") }}</h3>
     <h3 class="h5">Album : <a href="{{ path('album', {id:vinyl.album.id}) }}">{{ vinyl.album.name }}</a></h3>
+
+    {% if vinyl.price > 0 %}
+        <p>Prix : {{ vinyl.price }} euros</p>
+    {% endif %}
+    <div class="mb-3">
+        <a href="{{ path('update_vinyl', {id:vinyl.id}) }}" class="btn btn-primary">
+            Mettre à jour ce vinyl
+        </a>
+    </div>
 
     <img src="{{ vinyl.photo }}" alt="" class="mh-23">
 

@@ -9,6 +9,7 @@ use App\Entity\Vinyl;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,6 +28,12 @@ class AddVinyleType extends AbstractType
             ])
             ->add('release_date', DateType::class, [
                 'widget' => 'single_text',
+                'label'   => false,
+            ])
+            ->add('pressing_number', TextType::class, [
+                'attr' => [
+                    'placeholder'  => 'Numéro de pressage'
+                ],
                 'label'   => false,
             ])
             ->add('photo',TextType::class, [
@@ -53,6 +60,12 @@ class AddVinyleType extends AbstractType
                 'multiple'      => true,
                 'expanded'      => true,
                 'by_reference'  => false,
+                'label'   => false,
+            ])
+            ->add('price',NumberType::class, [
+                'attr' => [
+                    'placeholder'  => 'prix',
+                ],
                 'label'   => false,
             ])
         ;

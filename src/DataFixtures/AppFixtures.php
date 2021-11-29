@@ -63,7 +63,8 @@ class AppFixtures extends Fixture
         //Genre Loop
         for ($i = 0; $i <= 3; $i++){
             $genre = new Genre();
-            $genre  ->setName($faker->word);
+            $genre  ->setName($faker->word)
+                    ->setDescription($faker->paragraph);
             $manager->persist($genre);
             $genres[] = $genre;
         }
@@ -87,6 +88,7 @@ class AppFixtures extends Fixture
                 $album = new Album();
                 $album  ->setName($faker->word)
                         ->setPhoto('https://via.placeholder.com/450')
+                        ->setDescription($faker->paragraph)
                         ->addGenre($artist->getGenres()[0]);
 
                 //Tracks loop
@@ -111,6 +113,10 @@ class AppFixtures extends Fixture
                 for ($a = $n; $a < 6; $a++) {
                     $vinyl = new Vinyl();
                     $vinyl  ->setTitle($album->getName())
+                            ->setPrice($this->random_float(1, 200))
+                            ->setPressingNumber(
+                                "POS" . $faker->numberBetween(1, 10) . "H" . $faker->numberBetween(50, 150)
+                            )
                             ->setReleaseDate($faker->dateTime($max = 'now', $timezone = null))
                             ->setAlbum($album)
                             ->setPhoto('https://via.placeholder.com/450')
