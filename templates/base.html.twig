@@ -23,9 +23,21 @@
         <header class="sticky-top shadow">
             {% include './base_blocks/header.html.twig' %}
         </header>
+        {% block extra_section_up %}
+            {% for label, messages in app.flashes %}
+                <div class="container mt-2">
+                    <div class="alert alert-{{ label }}">
+                        {% for message in messages %}
+                            <p class="m-0">{{ message | raw }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endblock %}
         <div class="container min-vh-92">
             {% block body %}{% endblock %}
         </div>
+        {% block extra_section_down %}{% endblock %}
         <footer>
             {% include './base_blocks/footer.html.twig' %}
         </footer>

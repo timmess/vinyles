@@ -2,6 +2,17 @@
 
 {% block title %}Vinylium{% endblock %}
 
+{% block extra_section_up %}
+    <div class="container-fluid toto d-flex flex-column justify-content-center">
+        <div class="row text-center d-flex justify-content-center">
+            <div class="col-6 bg-black rounded bg-opacity-75 pb-3">
+                <p class="mb-2 h1 text-white">Tu souhaites renseigner tes vinyles ?</p>
+                <a class="btn btn-primary" href="{{ path('artists') }}">Commencer ma collection !</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
 {% block body %}
     <div class="row border">
         <h2>Nos derniers vinyls ajoutés :</h2>

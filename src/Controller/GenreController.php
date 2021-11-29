@@ -73,7 +73,7 @@ class GenreController extends AbstractController
             ]);
         }
 
-        $title = "Mettre à jour " . $genre->getName();
+        $title = "Mettre à jour le genre " . $genre->getName();
 
         return $this->render('forms/genre_form.html.twig', [
             'form' => $update_genre_form->createView(),

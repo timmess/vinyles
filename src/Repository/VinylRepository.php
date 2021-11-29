@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Genre;
 use App\Entity\Vinyl;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -21,10 +22,10 @@ class VinylRepository extends ServiceEntityRepository
 
     public function findLastsVinyls(int $int){
         return $this->createQueryBuilder('v')
-                    ->orderBy('v.id', 'DESC')
-                    ->setMaxResults($int)
-                    ->getQuery()
-                    ->getResult();
+            ->orderBy('v.id', 'DESC')
+            ->setMaxResults($int)
+            ->getQuery()
+            ->getResult();
     }
 
     // /**

@@ -9,16 +9,16 @@
             <h2 class="h4">Mettre à jour {{ album.name }} de {{ album.artist.name }}</h2>
             <img src="{{ album.photo }}" alt="{{ album.artist.name }}" class="mh-23 my-3">
             <div class="row">
-                <div class="col">
+                <div class="my-2">
                     {{form_row(form.name)}}
                 </div>
-                <div class="col">
+                <div class="my-2">
                     {{form_row(form.photo)}}
                 </div>
-                <div class="col d-none">
+                <div class="my-2 d-none">
                     {{form_row(form.artist)}}
                 </div>
-                <div class="col">
+                <div class="my-2">
                     {{form_row(form.genres)}}
                 </div>
             </div>
