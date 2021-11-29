@@ -66,7 +66,7 @@ class ArtistController extends AbstractController
 
             $this->addFlash(
                 'success',
-                $artist->getName() . 'a bien été modifié !'
+                $artist->getName() . ' a bien été modifié !'
             );
 
             return $this->redirectToRoute('artist', [

@@ -3,28 +3,28 @@
 {% block title %}{{ album.artist.name }}{% endblock %}
 
 {% block body %}
-    <h2 class="h4">Mettre à jour {{ album.name }} de {{ album.artist.name }}</h2>
+    <h2 class="h4 mt-2">Mettre à jour {{ album.name }} de {{ album.artist.name }}</h2>
     <img src="{{ album.photo }}" alt="{{ album.artist.name }}" class="mh-23 my-3">
 
     {{ form_start(form) }}
 
         <div class="input-group">
-            {{form_row(form.name, 'attr':{'class' : 'form-control'})}}
+            {{form_row(form.name, {'attr':{'class' : 'form-control my-2'}})}}
         </div>
 
         <div class="input-group">
-            {{form_row(form.photo, 'attr':{'class' : 'form-control'})}}
+            {{form_row(form.photo, {'attr':{'class' : 'form-control my-2'}})}}
         </div>
 
         <div class="input-group">
-            {{form_row(form.artist, 'attr':{'class' : 'form-control'})}}
+            {{form_row(form.artist, {'attr':{'class' : 'form-control my-2'}})}}
         </div>
 
         <div class="input-group">
-            {{form_row(form.genres)}}
+            {{form_row(form.genres, {'attr':{'class' : 'my-2'}})}}
         </div>
 
-        <button type="submit" class="btn btn-success">Enregistrer</button>
+        <button type="submit" class="btn btn-success my-2">Enregistrer</button>
 
     {{ form_end(form) }}
 {% endblock %}

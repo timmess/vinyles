@@ -5,6 +5,8 @@
 {% block body %}
     <h1>{{ genre.name }}</h1>
 
+    <p>{{ genre.description }}</p>
+
     {% if admin %}
         <div class="my-2"><a href="{{ path('updateGenre', {id:genre.id}) }}" class="btn btn-info">Mettre à jour {{ genre.name }}</a></div>
     {% endif %}

@@ -9,8 +9,15 @@
     {% if app.user.vinyls | length > 0 %}
         <ul class="list-group">
             {% for vinyl in user_vinyls %}
-                <li class="list-group-item">
-                    <a href="{{ path('artist', {id:vinyl.artist.id}) }}">{{ vinyl.artist.name }}</a> - <a href="{{ path('vinyl', {id:vinyl.id}) }}">{{ vinyl.title }}</a> ({{ vinyl.releaseDate | date("d/m/Y") }})
+                <li class="list-group-item h3">
+                    <a href="{{ path('vinyl', {id:vinyl.id}) }}">
+                        <img src="{{ vinyl.album.photo }}"
+                             alt="{{ vinyl.artist.name }}"
+                             class="w-10 me-3">
+                    </a>
+                    <a href="{{ path('vinyl', {id:vinyl.id}) }}">
+                        {{ vinyl.artist.name }} - {{ vinyl.title }}
+                    </a> ({{ vinyl.releaseDate | date("d/m/Y") }})
                 </li>
             {% endfor %}
         </ul>

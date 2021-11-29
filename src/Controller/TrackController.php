@@ -99,13 +99,8 @@ class TrackController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'La chanson ' . $track->getTitle() . 'de ' . $track->getAlbum()->getArtist()->getName() . ' a bien été ajoutée sur l\'album ' . $track->getAlbum()->getName() . ' !'
+                'La chanson ' . $track->getTitle() . ' de ' . $track->getAlbum()->getArtist()->getName() . ' a bien été ajoutée sur l\'album ' . $track->getAlbum()->getName() . ' !'
             );
-
-            return $this->redirectToRoute('album', [
-                'id' => $id,
-                'album' => $album
-            ]);
         }
 
         return $this->render('forms/track_form.html.twig', [
