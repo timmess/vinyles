@@ -33,7 +33,8 @@
                         {% if artist.albums | length > 0 %}
                             {% for album in artist.albums %}
                                     <li class="list-unstyled">
-                                        <a href="{{ path('album', {id:album.id}) }}" class="text-decoration-none list-group-item primary-hover text-dark">
+                                        <a href="{{ path('album', {id:album.id}) }}"
+                                           class="text-decoration-none list-group-item primary-hover text-dark">
                                             <img src="{{ album.photo }}" alt="{{ album.name }}" class="w-10">
                                             {{ album.name | capitalize}}
                                         </a>
