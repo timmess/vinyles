@@ -3,24 +3,32 @@
 {% block title %}{{ artist.name }}{% endblock %}
 
 {% block body %}
+    <h2 class="h4">Ajouter un album à {{ artist.name }}</h2>
+    <img src="{{ artist.photo }}" alt="{{ artist.name }}" class="mh-23 my-3">
     {{ form_start(form) }}
-
-        <div class="alert alert-light">
-            <h2 class="h4">Ajouter un album à {{ artist.name }}</h2>
-            <img src="{{ artist.photo }}" alt="{{ artist.name }}" class="mh-23 my-3">
-            <div class="row">
-                <div class="my-2">
-                    {{form_row(form.name)}}
-                </div>
-                <div class="my-2">
-                    {{form_row(form.photo)}}
-                </div>
-                <div class="my-2 d-none">
-                    {{form_row(form.artist)}}
-                </div>
-                <div class="my-2">
-                    {{form_row(form.genres)}}
-                </div>
+        <div class="input-group">
+            <div class="my-custom-class-for-errors">
+                {{ form_errors(form) }}
+            </div>
+        </div>
+        <div class="input-group">
+            <div class="my-2">
+                {{form_row(form.name, {'attr':{'class' : 'form-control'}})}}
+            </div>
+        </div>
+        <div class="input-group">
+            <div class="my-2">
+                {{form_row(form.photo, {'attr':{'class' : 'form-control'}})}}
+            </div>
+        </div>
+        <div class="input-group">
+            <div class="my-2 d-none">
+                {{form_row(form.artist, {'attr':{'class' : 'form-control'}})}}
+            </div>
+        </div>
+        <div class="input-group">
+            <div class="my-2">
+                {{form_row(form.genres)}}
             </div>
         </div>
 

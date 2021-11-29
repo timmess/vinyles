@@ -41,7 +41,7 @@ class AddAlbumType extends AbstractType
                 'multiple'      => true,
                 'expanded'      => true,
                 'by_reference'  => false,
-                'label'   => false,
+                'label'         => false,
             ])
         ;
     }

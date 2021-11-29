@@ -1,27 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Artiste{% endblock %}
 
 {% block body %}
+    <h2 class="h4">Ajouter un artiste</h2>
+
     {{ form_start(form) }}
-
-    <div class="alert alert-light">
-        <h2 class="h4">Ajouter un artiste</h2>
-        <div class="row">
-            <div class="my-2">
-                {{form_row(form.name)}}
-            </div>
-            <div class="my-2">
-                {{form_row(form.photo)}}
-            </div>
-            <div class="my-2">
-                {{form_row(form.genres)}}
-            </div>
+        <div class="input-group">
+            {{form_row(form.name, {'attr':{'class' : 'form-control my-2'}})}}
         </div>
-    </div>
+        <div class="input-group">
+            {{form_row(form.photo, {'attr':{'class' : 'form-control my-2'}})}}
+        </div>
+        <div class="input-group">
+            {{form_row(form.genres)}}
+        </div>
 
-    <button type="submit" class="btn btn-success">Enregistrer</button>
-
-
+        <button type="submit" class="btn btn-success">Enregistrer</button>
     {{ form_end(form) }}
 {% endblock %}
