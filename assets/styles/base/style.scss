@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+
 .mh-15{
   max-height: 15rem!important;
 }
@@ -10,6 +11,10 @@
 }
 
 .min-h-17{
+  min-height: 17rem;
+}
+
+.min-h-25{
   min-height: 17rem;
 }
 
@@ -24,6 +29,15 @@
 .mh-23{
   max-height: 23rem;
 }
+
+.he-25{
+  height: 25rem;
+}
+
+.w-10{
+  width: 10% !important;
+}
+
 
 .primary-hover:hover{
   color: $primary!important;
@@ -53,3 +67,4 @@ body{
 .navbar{
   min-height: 4rem;
 }
+

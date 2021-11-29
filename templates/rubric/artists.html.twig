@@ -9,27 +9,52 @@
     {% endif %}
     <div class="row">
         {% for artist in artists %}
-            <div class="col-6 border my-3">
-                <h2><a href="{{ path('artist', {id: artist.id}) }}" class="text-dark primary-hover text-decoration-none">{{ artist.name }}</a></h2>
-                <hr/>
-                <div class="text-center">
-                    <a href="{{ path('artist', {id:artist.id}) }}"><img src="{{ artist.photo }}" alt="{{ artist.name }}" class="w-75 border h-21"></a>
-                </div>
-                <p>Genre{% if artist.genres | length > 1 %}s{% endif%} : {% for genre in artist.genres %}<a href="{{ path('genre', {id:genre.id}) }}">{{ genre.name }}</a>{% if artist.genres | length > 1 and loop.last != true %}, {% endif%}{% endfor %}</p>
-                <p class="h2 text-decoration-underline">Albums :</p>
-                <ul class="list-group my-2">
-                    {% if artist.albums | length > 0 %}
-                        {% for album in artist.albums %}
-                            <li class="list-group-item"><h3><a href="{{ path('album', {id: album.id}) }}" class="text-decoration-none text-dark primary-hover ">{{ album.name | capitalize}}</a></h3></li>
-                        {% endfor %}
-                    {% else %}
-                        <p class="h3">Aucun album ajouté</p>
-                        {% if admin %}
-                            <div><a href="{{ path('addAlbumByArtist', {id:artist.id}) }}" class="btn btn-info my-2">Ajouter un album</a></div>
+        <div class="col-6 card-group">
+            <div class="card shadow my-3">
+                <a href="{{ path('artist', {id:artist.id}) }}">
+                    <img src="{{ artist.photo }}" alt="{{ artist.name }}" class="he-25 w-100">
+                </a>
+                <div class="card-body">
+                    <h2>
+                        <a href="{{ path('artist', {id: artist.id}) }}"
+                           class="text-dark primary-hover text-decoration-none">
+                            {{ artist.name }}
+                        </a>
+                    </h2>
+                    <p>
+                        Genre{% if artist.genres | length > 1 %}s{% endif%} :
+                        {% for genre in artist.genres %}
+                            <a href="{{ path('genre', {id:genre.id}) }}">
+                                {{ genre.name }}
+                            </a>
+                            {% if artist.genres | length > 1 and loop.last != true %}, {% endif%}{% endfor %}</p>
+                    <p class="h2">Albums :</p>
+                    <ul class="list-group my-2">
+                        {% if artist.albums | length > 0 %}
+                            {% for album in artist.albums %}
+                                    <li class="list-unstyled">
+                                        <a href="{{ path('album', {id:album.id}) }}" class="text-decoration-none list-group-item primary-hover text-dark">
+                                            <img src="{{ album.photo }}" alt="{{ album.name }}" class="w-10">
+                                            {{ album.name | capitalize}}
+                                        </a>
+                                    </li>
+                            {% endfor %}
+                        {% else %}
+                            <p class="h3">Aucun album ajouté</p>
+                            {% if admin %}
+                                <div>
+                                    <a href="{{ path('addAlbumByArtist', {id:artist.id}) }}"
+                                       class="btn btn-info my-2">
+                                        Ajouter un album
+                                    </a>
+                                </div>
+                            {% endif %}
                         {% endif %}
-                    {% endif %}
-                </ul>
+                    </ul>
+                </div>
             </div>
+        </div>
+
         {% endfor %}
         <div class="pagination my-2">
             {{ knp_pagination_render(artists) }}
