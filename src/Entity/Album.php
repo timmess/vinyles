@@ -49,6 +49,11 @@ class Album
      */
     private $genres;
 
+    /**
+     * @ORM\Column(type="string", length=1000, nullable=true)
+     */
+    private $description;
+
     public function __construct()
     {
         $this->vinyl = new ArrayCollection();
@@ -180,6 +185,18 @@ class Album
         if ($this->genres->removeElement($genre)) {
             $genre->removeAlbum($this);
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }
