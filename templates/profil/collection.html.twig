@@ -11,7 +11,7 @@
         <ul class="list-group">
             {% for vinyl in user_vinyls %}
                 <li class="list-group-item h3">
-                    <a href="{{ path('vinyl', {id:vinyl.id}) }}">
+                    <a href="{{ path('vinyl', {id:vinyl.id}) }}" class="text-decoration-none">
                         <img src="{{ vinyl.album.photo }}"
                              alt="{{ vinyl.artist.name }}"
                              class="w-10 me-3">

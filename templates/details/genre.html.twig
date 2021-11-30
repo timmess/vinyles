@@ -8,15 +8,52 @@
     <p>{{ genre.description }}</p>
 
     {% if admin %}
-        <div class="my-2"><a href="{{ path('updateGenre', {id:genre.id}) }}" class="btn btn-info">Mettre à jour {{ genre.name }}</a></div>
+        <div class="my-2">
+            <a href="{{ path('updateGenre', {id:genre.id}) }}" class="btn btn-info">
+                Mettre à jour {{ genre.name }}
+            </a>
+        </div>
     {% endif %}
 
     <h2>Artistes :</h2>
-    <ul class="list-group">
-        {% for artist in genre.artists %}
-            <li class="list-group-item">
-                <a href="{{ path('artist',{id:artist.id}) }}">{{ artist.name }}</a>
-            </li>
-        {% endfor %}
-    </ul>
+    {% if genre.artists | length > 0 %}
+        <div class="row">
+            {% for artist in genre.artists %}
+                <div class="col-6 card-group">
+                    <div class="card shadow my-3">
+                        <a href="{{ path('artist', {id:artist.id}) }}">
+                            <img src="{{ artist.photo }}" alt="{{ artist.name }}" class="he-25 w-100 object-fit-cover">
+                        </a>
+                        <div class="card-body">
+                            <h2>
+                                <a href="{{ path('artist', {id: artist.id}) }}"
+                                   class="text-dark primary-hover text-decoration-none">
+                                    {{ artist.name }}
+                                </a>
+                            </h2>
+                            {% if artist.genres | length > 1 %}
+                                <p>Autres genres :
+                                    {% for artist_genre in artist.genres %}
+                                        {% if artist_genre.id != genre.id  %}
+                                            <a href="{{ path('genre', {id:artist_genre.id}) }}">{{ artist_genre.name }}</a>{% if artist.genres | length > 2 and loop.last != true %}, {% endif%}
+                                        {% endif %}
+                                    {% endfor %}
+                                </p>
+                            {% endif%}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Ce genre n'a pas d'artiste.</p>
+        {% if admin %}
+            <div class="col-2 my-2">
+                <a href="{{ path("add_artist") }}"
+                   class="btn btn-primary">
+                    Ajouter un artiste
+                </a>
+            </div>
+        {% endif %}
+    {% endif %}
 {% endblock %}

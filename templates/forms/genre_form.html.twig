@@ -8,11 +8,11 @@
 
     {{ form_start(form) }}
         <div class="input-group">
-            {{form_row(form.name, {'attr':{'class' : 'form-control my-2'}})}}
+            {{form_row(form.name, {'attr':{'class' : 'form-control my-2 col-6'}})}}
         </div>
-        <div class="input-group">
-            {{form_row(form.description, {'attr':{'class' : 'form-control my-2'}})}}
+        <div class="col-6">
+            {{form_row(form.description, {'attr':{'class' : 'form-control my-2 col-6 form_description'}})}}
         </div>
-        <button type="submit" class="btn btn-success">Enregistrer</button>
+        <button type="submit" class="btn btn-success my-2">Enregistrer</button>
     {{ form_end(form) }}
 {% endblock %}

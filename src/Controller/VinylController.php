@@ -79,7 +79,8 @@ class VinylController extends AbstractController
 
         return $this->render('forms/vinyl_form.html.twig', [
             'form' => $update_vinyl_form->createView(),
-            'title' => $title
+            'title' => $title,
+            'vinyl' => $vinyl
         ]);
     }
 
