@@ -21,6 +21,8 @@ class HomeController extends AbstractController
 
         $all_albums = $albumRepository->findAll();
 
+        shuffle($all_albums);
+
         $albums = array_slice($all_albums, 3, 3);
 
         return $this->render('home/index.html.twig', [
