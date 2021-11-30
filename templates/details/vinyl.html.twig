@@ -14,11 +14,13 @@
     {% if vinyl.price > 0 %}
         <p>Prix : {{ vinyl.price }} euros</p>
     {% endif %}
-    <div class="mb-3">
-        <a href="{{ path('update_vinyl', {id:vinyl.id}) }}" class="btn btn-primary">
-            Mettre à jour ce vinyl
-        </a>
-    </div>
+    {% if admin %}
+        <div class="mb-3">
+            <a href="{{ path('update_vinyl', {id:vinyl.id}) }}" class="btn btn-primary">
+                Mettre à jour ce vinyl
+            </a>
+        </div>
+    {% endif %}
 
     <img src="{{ vinyl.photo }}" alt="" class="mh-23">
 
