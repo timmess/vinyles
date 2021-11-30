@@ -19,7 +19,9 @@ class HomeController extends AbstractController
 
         $last_vinyls = $vinylRepo->findLastsVinyls(3);
 
-        $albums = array_slice($albumRepository->findAll(), 3);
+        $all_albums = $albumRepository->findAll();
+
+        $albums = array_slice($all_albums, 3, 3);
 
         return $this->render('home/index.html.twig', [
             'user'          => $user,
