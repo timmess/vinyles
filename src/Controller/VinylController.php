@@ -157,8 +157,34 @@ class VinylController extends AbstractController
 
         $manager->flush();
 
+        $this->addFlash(
+            'success',
+            'Le vinyl ' . $vinyl->getTitle() . ' de ' . $vinyl->getArtist()->getName() . ' a bien ajouté de votre collection !'
+        );
+
         return $this->redirectToRoute('collection', [
             'id'    => $userId
+        ]);
+    }
+
+    /**
+     * @Route("/removeVinylFromUserCollection/{id}/{userId}", name="removeVinylFromUserCollection")
+     */
+    public function removeVinylFromUserCollection($userId, $id, VinylRepository $vinylRepository, UserRepository $userRepository, EntityManagerInterface $manager){
+        $vinyl = $vinylRepository->find($id);
+        $user = $userRepository->find($userId);
+        $user->removeVinyl($vinyl);
+
+        $manager->persist($user);
+        $manager->flush();
+
+        $this->addFlash(
+            'success',
+            'Le vinyl ' . $vinyl->getTitle() . ' de ' . $vinyl->getArtist()->getName() . ' a bien retiré de votre collection !'
+        );
+
+        return $this->redirectToRoute('collection', [
+            'id' => $user->getId()
         ]);
     }
 }

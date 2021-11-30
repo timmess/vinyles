@@ -10,15 +10,21 @@
     {% if app.user.vinyls | length > 0 %}
         <ul class="list-group">
             {% for vinyl in user_vinyls %}
-                <li class="list-group-item h3">
-                    <a href="{{ path('vinyl', {id:vinyl.id}) }}" class="text-decoration-none">
-                        <img src="{{ vinyl.album.photo }}"
-                             alt="{{ vinyl.artist.name }}"
-                             class="w-10 me-3">
+                <li class="list-group-item h3 d-flex justify-content-between align-items-center">
+                    <div>
+                        <a href="{{ path('vinyl', {id:vinyl.id}) }}" class="text-decoration-none">
+                            <img src="{{ vinyl.album.photo }}"
+                                 alt="{{ vinyl.artist.name }}"
+                                 class="w-10 me-3"
+                            >
+                        </a>
+                        <a href="{{ path('vinyl', {id:vinyl.id}) }}">
+                            {{ vinyl.artist.name }} - {{ vinyl.title }}
+                        </a> ({{ vinyl.releaseDate | date("d/m/Y") }})
+                    </div>
+                    <a href="{{ path('removeVinylFromUserCollection', {id:vinyl.id, userId: app.user.id}) }}" class="fw-bold btn btn-danger text-end">
+                        X
                     </a>
-                    <a href="{{ path('vinyl', {id:vinyl.id}) }}">
-                        {{ vinyl.artist.name }} - {{ vinyl.title }}
-                    </a> ({{ vinyl.releaseDate | date("d/m/Y") }})
                 </li>
             {% endfor %}
         </ul>
