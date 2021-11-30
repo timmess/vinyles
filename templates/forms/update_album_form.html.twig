@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajouter un album{% endblock %}
+{% block title %}{{ album.artist.name }}{% endblock %}
 
 {% block body %}
-    <h1>Ajouter un album</h1>
+    <h2 class="h4 mt-2">Mettre à jour {{ album.name }} de {{ album.artist.name }}</h2>
+    <img src="{{ album.photo }}" alt="{{ album.artist.name }}" class="mh-23 my-3">
 
     {{ form_start(form) }}
 

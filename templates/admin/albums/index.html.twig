@@ -8,6 +8,7 @@
         <div class="col-2 my-2"><a href="{{ path("add_album") }}" class="btn btn-primary">Ajouter un album</a></div>
     </div>
     <div class="row">
+        {% set i = 1 %}
         {% for album in albums %}
             <div class="col-2">
                 <img src="{{ album.photo }}" alt="" class="w-100">
@@ -16,8 +17,48 @@
                 <h2 class="h4">{{ album.name }}</h2>
                 <h2 class="h5">{{ album.artist.name }}</h2>
                 <a href="{{ path('updateAlbum', {id:album.id}) }}" class="btn btn-info">Mettre à jour</a>
-                <a href="{{ path('deleteAlbum', {id:album.id}) }}" class="btn btn-danger">Supprimer</a>
+
+                <!-- Button trigger modal -->
+                <button type="button"
+                        class="fw-bold btn btn-danger"
+                        data-bs-toggle="modal"
+                        data-bs-target="#removeAlbum{{ i }}">
+                    Supprimer
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade"
+                     id="removeAlbum{{ i }}"
+                     tabindex="-1"
+                     aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Attention</h5>
+                                <button type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close">
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="h5">
+                                    Souhaitez vous réellement supprimer {{ album.name }} de {{ album.artist.name }} définitivement ?
+                                </p>
+                                <a href="{{ path('deleteAlbum', {id:album.id}) }}" class="btn btn-danger">Supprimer</a>
+                                <button type="button"
+                                        class="btn btn-primary"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close">
+                                    Non
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            {% set i = i + 1 %}
         {% endfor %}
         <div class="pagination my-2">
             {{ knp_pagination_render(albums) }}

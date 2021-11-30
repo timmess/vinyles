@@ -77,7 +77,8 @@ class GenreController extends AbstractController
 
         return $this->render('forms/genre_form.html.twig', [
             'form' => $update_genre_form->createView(),
-            'title' => $title
+            'title' => $title,
+            'genre' => $genre
         ]);
     }
 

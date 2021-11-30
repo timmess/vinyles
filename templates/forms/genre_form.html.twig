@@ -6,6 +6,10 @@
 
     <h2 class="h4">{{ title }}</h2>
 
+    {% if genre is defined %}
+        <img src="{{ genre.image }}" alt="{{ genre.name }}" class="mh-23 my-3">
+    {% endif %}
+
     {{ form_start(form) }}
         <div class="input-group">
             {{form_row(form.name, {'attr':{'class' : 'form-control my-2 col-6'}})}}

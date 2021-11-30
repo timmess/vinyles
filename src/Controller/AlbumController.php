@@ -75,7 +75,7 @@ class AlbumController extends AbstractController
             ]);
         }
 
-        return $this->render('forms/album_form.html.twig', [
+        return $this->render('forms/update_album_form.html.twig', [
             'form' => $update_album_form->createView(),
             'album' => $album,
         ]);
@@ -92,7 +92,7 @@ class AlbumController extends AbstractController
 
         $this->addFlash(
             'success',
-            'L\'album ' . $album->getName() .  'a bien été supprimé !'
+            'L\'album ' . $album->getName() .  ' a bien été supprimé !'
         );
 
         return $this->redirectToRoute('artist', [
@@ -122,7 +122,7 @@ class AlbumController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'L\'album ' . $album->getName() . 'a bien été ajouté à ' . $artist->getName() . ' !'
+                'L\'album ' . $album->getName() . ' a bien été ajouté à ' . $artist->getName() . ' !'
             );
 
             return $this->redirectToRoute('album', [

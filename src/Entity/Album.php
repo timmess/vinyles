@@ -30,7 +30,7 @@ class Album
     private $artist;
 
     /**
-     * @ORM\OneToMany(targetEntity=Vinyl::class, mappedBy="album")
+     * @ORM\OneToMany(targetEntity=Vinyl::class, mappedBy="album", cascade = {"remove"})
      */
     private $vinyl;
 

@@ -33,7 +33,7 @@ class VinylController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Le vinyl ' . $vinyl->getTitle() . ' de ' . $vinyl->getArtist()->getName() . 'a bien été ajouté !'
+                'Le vinyl ' . $vinyl->getTitle() . ' de ' . $vinyl->getArtist()->getName() . ' (' . $vinyl->getPressingNumber() . ') a bien été ajouté !'
             );
 
             return $this->redirectToRoute('vinyl', [
@@ -67,7 +67,7 @@ class VinylController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Le vinyl ' . $vinyl->getTitle() . ' de ' . $vinyl->getArtist()->getName() . ' a bien été modifié !'
+                'Le vinyl ' . $vinyl->getTitle() . ' de ' . $vinyl->getArtist()->getName() . ' (' . $vinyl->getPressingNumber() . ') a bien été modifié !'
             );
 
             return $this->redirectToRoute('vinyl', [
@@ -95,7 +95,7 @@ class VinylController extends AbstractController
 
         $this->addFlash(
             'success',
-            'Le vinyl ' . $vinyl->getTitle() . ' de ' . $vinyl->getArtist()->getName() . ' a bien été supprimé !'
+            'Le vinyl ' . $vinyl->getTitle() . ' de ' . $vinyl->getArtist()->getName() . ' (' . $vinyl->getPressingNumber() . ') a bien été supprimé !'
         );
 
         return $this->redirectToRoute('album', [
@@ -159,7 +159,7 @@ class VinylController extends AbstractController
 
         $this->addFlash(
             'success',
-            'Le vinyl ' . $vinyl->getTitle() . ' de ' . $vinyl->getArtist()->getName() . ' a bien ajouté de votre collection !'
+         'Le vinyl ' . $vinyl->getTitle() . ' de ' . $vinyl->getArtist()->getName() . ' (' . $vinyl->getPressingNumber() . ') a bien ajouté de votre collection !'
         );
 
         return $this->redirectToRoute('collection', [
@@ -180,7 +180,7 @@ class VinylController extends AbstractController
 
         $this->addFlash(
             'success',
-            'Le vinyl ' . $vinyl->getTitle() . ' de ' . $vinyl->getArtist()->getName() . ' a bien retiré de votre collection !'
+            'Le vinyl ' . $vinyl->getTitle() . ' de ' . $vinyl->getArtist()->getName() . ' (' . $vinyl->getPressingNumber() . ') a bien retiré de votre collection !'
         );
 
         return $this->redirectToRoute('collection', [

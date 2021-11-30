@@ -14,7 +14,7 @@
         {% endfor %}
     </h2>
 
-    <p>{{ album.description }}</p>
+    <p class="col-8">{{ album.description }}</p>
 
     <img src="{{ album.photo }}" alt="" class="mh-23">
 
@@ -44,9 +44,51 @@
                             <a href="{{ path('updateTrack', {id:track.id}) }}" class="btn btn-primary fs-6">
                                 <i class="fas fa-pen"></i>
                             </a>
-                            <a href="{{ path('deleteTrack', {id:track.id}) }}" class="fw-bold btn btn-danger">
+
+                            <!-- Button trigger modal -->
+                            <button type="button"
+                                    class="fw-bold btn btn-danger"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#removeTrackFromVinyl">
                                 X
-                            </a>
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade"
+                                 id="removeTrackFromVinyl"
+                                 tabindex="-1"
+                                 aria-labelledby="exampleModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Attention</h5>
+                                            <button type="button"
+                                                    class="btn-close"
+                                                    data-bs-dismiss="modal"
+                                                    aria-label="Close">
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="h5">
+                                                Souhaitez vous réellement supprimer {{ track.title }}
+                                                de {{ track.album.artist.name}} définitivement ?
+                                            </p>
+                                            <a href="{{ path('deleteTrack', {id:track.id}) }}"
+                                               class="fw-bold btn btn-danger">
+                                                Oui
+                                            </a>
+                                            <button type="button"
+                                                    class="btn btn-primary"
+                                                    data-bs-dismiss="modal"
+                                                    aria-label="Close">
+                                                Non
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         {% endif %}
                     </div>
                 </div>
@@ -67,16 +109,67 @@
                 <a class="text-dark primary-hover text-decoration-none" href="{{ path('vinyl', {id: vinyl.id}) }}">
                     {{ vinyl.title }} ({{ vinyl.releasedate | date("d/m/Y") }})
                 </a>
+                <div>
+                {% if app.user %}
+                    {% if vinyl not in app.user.vinyls %}
+                            <a href="{{ path('addVinylToUserCollection', {id:vinyl.id, userId: app.user.id}) }}"
+                               data-bs-toggle="tooltip"
+                               data-bs-placement="top"
+                               title="Ajouter à ma collection"><i class="far fa-plus-square fs-2"></i>
+                            </a>
+                    {% else %}
+                        <p class="m-0">Vous possédez ce vinyle</p>
+                    {% endif %}
+                {% endif %}
                 {% if admin %}
-                    <div>
                         <a href="{{ path('update_vinyl', {id:vinyl.id}) }}" class="btn btn-primary text-end">
                             <i class="fas fa-pen"></i>
                         </a>
-                        <a href="{{ path('deleteVinyl', {id:vinyl.id}) }}" class="fw-bold btn btn-danger text-end">
+
+                        <!-- Button trigger modal -->
+                        <button type="button"
+                                class="fw-bold btn btn-danger text-end"
+                                data-bs-toggle="modal"
+                                data-bs-target="#removeVinylFromCollection">
                             X
-                        </a>
-                    </div>
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade"
+                             id="removeVinylFromCollection"
+                             tabindex="-1"
+                             aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Attention</h5>
+                                        <button type="button"
+                                                class="btn-close"
+                                                data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p class="h5">
+                                            Souhaitez vous réellement supprimer {{ vinyl.title }}
+                                            ({{ vinyl.pressingNumber }}) définitivement ?
+                                        </p>
+                                        <a href="{{ path('deleteVinyl', {id:vinyl.id}) }}"
+                                           class="fw-bold btn btn-danger text-end">
+                                            Oui
+                                        </a>
+                                        <button type="button"
+                                                class="btn btn-primary"
+                                                data-bs-dismiss="modal"
+                                                aria-label="Close">
+                                            Non
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                 {% endif %}
+                </div>
             </li>
         {% endfor %}
     </ul>

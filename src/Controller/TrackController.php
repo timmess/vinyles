@@ -70,7 +70,7 @@ class TrackController extends AbstractController
             ]);
         }
 
-        return $this->render('forms/track_form.html.twig', [
+        return $this->render('forms/update_track_form.html.twig', [
             'form' => $update_track_form->createView(),
             'album' => $album
         ]);
@@ -103,7 +103,7 @@ class TrackController extends AbstractController
             );
         }
 
-        return $this->render('forms/track_form.html.twig', [
+        return $this->render('forms/update_track_form.html.twig', [
             'form' =>$add_track_by_album_type->createView(),
             'album' => $album,
         ]);

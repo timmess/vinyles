@@ -6,7 +6,9 @@
     <h2 class="h4">{{ title}}</h2>
     {{ form_start(form) }}
 
-        <img class="mh-23" src="{{ vinyl.photo }}" alt="{{ vinyl.title }}">
+        {% if vinyl is defined %}
+            <img class="mh-23" src="{{ vinyl.photo }}" alt="{{ vinyl.title }}">
+        {% endif %}
 
         <div class="input-group">
             {{form_row(form.title, {'attr':{'class' : 'form-control my-2'}})}}

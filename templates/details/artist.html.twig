@@ -5,7 +5,11 @@
 {% block body %}
     <h1>{{ artist.name | capitalize}}</h1>
     {% if admin %}
-        <div class="my-2"><a href="{{ path('updateArtist', {id:artist.id}) }}" class="btn btn-info">Mettre à jour {{ artist.name }}</a></div>
+        <div class="my-2">
+            <a href="{{ path('updateArtist', {id:artist.id}) }}" class="btn btn-info">
+                Mettre à jour {{ artist.name }}
+            </a>
+        </div>
     {% endif %}
     <img src="{{ artist.photo }}" alt="" class="mh-23">
     
@@ -21,24 +25,112 @@
 
     <h2>Albums :</h2>
     {% if admin %}
-        <div><a href="{{ path('addAlbumByArtist', {id:artist.id}) }}" class="btn btn-info mb-3">Ajouter un album</a></div>
+        <div>
+            <a href="{{ path('addAlbumByArtist', {id:artist.id}) }}" class="btn btn-info mb-3">Ajouter un album</a>
+        </div>
     {% endif %}
-    <ul class="list-group mb-3">
-        {% for album in artist.albums %}
-            <li class="list-group-item w-50 d-flex justify-content-between align-items-center">
-                <a href="{{ path('album', {id: album.id}) }}" class="text-decoration-none">
-                    <img src="{{ album.photo }}" alt="{{ album.name }}" class="w-10">
-                    {{ album.name }}
-                </a>
-                {% if admin %}
-                    <a href="{{ path('updateAlbum', {id:album.id}) }}" class="btn btn-primary text-end me-1">
-                        <i class="fas fa-pen"></i>
+    {% if artist.albums | length > 0 %}
+        <ul class="list-group mb-3">
+            {% set i = 1 %}
+            {% for album in artist.albums %}
+                <li class="list-group-item w-50 d-flex justify-content-between align-items-center">
+                    <a href="{{ path('album', {id: album.id}) }}" class="text-decoration-none">
+                        <img src="{{ album.photo }}" alt="{{ album.name }}" class="w-10">
+                        {{ album.name }}
                     </a>
-                    <a href="{{ path('deleteAlbum', {id:album.id}) }}" class="fw-bold btn btn-danger text-end">
-                        X
-                    </a>
-                {% endif %}
-            </li>
-        {% endfor %}
-    </ul>
+                    {% if admin %}
+                        <a href="{{ path('updateAlbum', {id:album.id}) }}" class="btn btn-primary text-end me-1">
+                            <i class="fas fa-pen"></i>
+                        </a>
+
+                        <!-- Button trigger modal -->
+                        <button type="button"
+                                class="fw-bold btn btn-danger text-end"
+                                data-bs-toggle="modal"
+                                data-bs-target="#removeAlbum{{ i }}">
+                            X
+                        </button>
+
+                        <!-- Modal 1 -->
+                        <div class="modal fade"
+                             id="removeAlbum{{ i }}"
+                             tabindex="-1"
+                             aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Attention</h5>
+                                        <button type="button"
+                                                class="btn-close"
+                                                data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p class="h5">
+                                            Souhaitez vous réellement supprimer {{ artist.name }} définitivement ?
+                                            Cette action efface également tous les titres de cet album
+                                            ainsi que tous ses vinyles !!
+                                        </p>
+                                        <button type="button"
+                                                class="fw-bold btn btn-danger text-end"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#removeArtist{{ i+1 }}">
+                                            Supprimer
+                                        </button>
+                                        <button type="button"
+                                                class="btn btn-primary"
+                                                data-bs-dismiss="modal"
+                                                aria-label="Close"
+                                        >
+                                            Non
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal 2 -->
+                        <div class="modal fade"
+                             id="removeArtist{{ i+1 }}"
+                             tabindex="-1"
+                             aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">
+                                            Attention
+                                        </h5>
+                                        <button type="button"
+                                                class="btn-close"
+                                                data-bs-dismiss="modal"
+                                                aria-label="Close">
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p class="h5">Vous êtes sûr ? Cette action est irreversible !</p>
+                                        <a href="{{ path('deleteAlbum', {id:album.id}) }}"
+                                           class="fw-bold btn btn-danger text-end">
+                                            Oui, je suis sûr.
+                                        </a>
+                                        <button type="button"
+                                                class="btn btn-primary"
+                                                data-bs-dismiss="modal"
+                                                aria-label="Close">
+                                            Non
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% set i = i + 2 %}
+                    {% endif %}
+                </li>
+                {% set i = i + 2 %}
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Cet artiste n'a pas encore d'album renseigné. Nous allons en ajouter sous peu !</p>
+    {% endif %}
 {% endblock %}

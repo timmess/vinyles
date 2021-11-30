@@ -91,7 +91,7 @@ class ArtistController extends AbstractController
 
         $this->addFlash(
             'success',
-            $artist->getName() . 'a bien été supprimé !'
+            $artist->getName() . ' a bien été supprimé !'
         );
 
         return $this->redirectToRoute('admin_artists');

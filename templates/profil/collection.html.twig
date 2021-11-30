@@ -9,23 +9,52 @@
     <p>Prix de ma collection : {{ collection_price }} euros.</p>
     {% if app.user.vinyls | length > 0 %}
         <ul class="list-group">
+            {% set i = 1 %}
             {% for vinyl in user_vinyls %}
                 <li class="list-group-item h3 d-flex justify-content-between align-items-center">
                     <div>
                         <a href="{{ path('vinyl', {id:vinyl.id}) }}" class="text-decoration-none">
                             <img src="{{ vinyl.album.photo }}"
                                  alt="{{ vinyl.artist.name }}"
-                                 class="w-10 me-3"
+                                 class="mxh-7 me-3"
                             >
                         </a>
                         <a href="{{ path('vinyl', {id:vinyl.id}) }}">
                             {{ vinyl.artist.name }} - {{ vinyl.title }}
                         </a> ({{ vinyl.releaseDate | date("d/m/Y") }})
                     </div>
-                    <a href="{{ path('removeVinylFromUserCollection', {id:vinyl.id, userId: app.user.id}) }}" class="fw-bold btn btn-danger text-end">
+
+                    <!-- Button trigger modal -->
+                    <button type="button"
+                            class="fw-bold btn btn-danger text-end"
+                            data-bs-toggle="modal"
+                            data-bs-target="#removeVinylFromCollection{{ i }}"
+                    >
                         X
-                    </a>
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="removeVinylFromCollection{{ i }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Attention</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="h5">Souhaitez vous réellement retirer {{ vinyl.title }} ({{ vinyl.pressingNumber }}) de vote collection ?</p>
+                                    <a href="{{ path('removeVinylFromUserCollection', {id:vinyl.id, userId: app.user.id}) }}" class="fw-bold btn btn-danger text-end">
+                                        Oui
+                                    </a>
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">
+                                        Non
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </li>
+                {% set i = i + 1 %}
             {% endfor %}
         </ul>
 

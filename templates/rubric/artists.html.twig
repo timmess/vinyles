@@ -24,10 +24,7 @@
                         <p>
                             Genre{% if artist.genres | length > 1 %}s{% endif%} :
                             {% for genre in artist.genres %}
-                                <a href="{{ path('genre', {id:genre.id}) }}">
-                                    {{ genre.name }}
-                                </a>
-                                {% if artist.genres | length > 1 and loop.last != true %}, {% endif%}
+                                <a href="{{ path('genre', {id:genre.id}) }}">{{ genre.name }}</a>{% if artist.genres | length > 1 and loop.last != true %}, {% endif%}
                             {% endfor %}
                         </p>
                     </div>
