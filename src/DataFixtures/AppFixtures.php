@@ -64,6 +64,7 @@ class AppFixtures extends Fixture
         for ($i = 0; $i <= 3; $i++){
             $genre = new Genre();
             $genre  ->setName($faker->word)
+                    ->setImage('https://via.placeholder.com/450')
                     ->setDescription($faker->paragraph);
             $manager->persist($genre);
             $genres[] = $genre;

@@ -7,7 +7,9 @@ use App\Repository\ArtistRepository;
 use App\Repository\GenreRepository;
 use App\Repository\TrackRepository;
 use App\Repository\VinylRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -69,11 +71,21 @@ class DetailsController extends AbstractController
     /**
      * @Route("/genre/{id}", name="genre")
      */
-    public function genreDetail(GenreRepository $repo, $id): Response
+    public function genreDetail(GenreRepository $repo, $id, PaginatorInterface $paginator, Request $request): Response
     {
         $genre = $repo->find($id);
+
+        $artists = $genre->getArtists();
+
+        $artists = $paginator->paginate(
+            $artists,
+            $request->query->getInt('page', 1),
+            4
+        );
+
         return $this->render('details/genre.html.twig', [
-            'genre' => $genre
+            'genre'     => $genre,
+            'artists'   => $artists
         ]);
     }
 }

@@ -5,11 +5,15 @@
 {% block body %}
     <h1>{{ genre.name }}</h1>
 
-    <p>{{ genre.description }}</p>
+    {% if genre.image %}
+        <img src="{{ genre.image }}" alt="{{ genre.name }}" class="mh-12 my-2">
+    {% endif %}
+
+    <p class="my-2">{{ genre.description }}</p>
 
     {% if admin %}
         <div class="my-2">
-            <a href="{{ path('updateGenre', {id:genre.id}) }}" class="btn btn-info">
+            <a href="{{ path('updateGenre', {id:genre.id}) }}" class="btn btn-info my-2">
                 Mettre à jour {{ genre.name }}
             </a>
         </div>
@@ -18,7 +22,7 @@
     <h2>Artistes :</h2>
     {% if genre.artists | length > 0 %}
         <div class="row">
-            {% for artist in genre.artists %}
+            {% for artist in artists %}
                 <div class="col-6 card-group">
                     <div class="card shadow my-3">
                         <a href="{{ path('artist', {id:artist.id}) }}">
@@ -44,7 +48,11 @@
                     </div>
                 </div>
             {% endfor %}
+            <div class="pagination my-2">
+                {{ knp_pagination_render(artists) }}
+            </div>
         </div>
+
     {% else %}
         <p>Ce genre n'a pas d'artiste.</p>
         {% if admin %}

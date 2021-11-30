@@ -25,6 +25,12 @@ class AddGenreType extends AbstractType
                 ],
                 'label'   => false,
             ])
+            ->add('image',TextType::class, [
+                'attr' => [
+                    'placeholder'  => 'Url de l\'image'
+                ],
+                'label'   => false,
+            ])
             ->add('description',TextareaType::class, [
                 'attr' => [
                     'placeholder'  => 'Description',
