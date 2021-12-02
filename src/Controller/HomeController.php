@@ -11,7 +11,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
+     * Permet d'afficher la page d'accueil
+     *
      * @Route("/", name="home")
+     *
+     * @param VinylRepository $vinylRepo
+     * @param AlbumRepository $albumRepository
+     *
+     * @return Response
      */
     public function index(VinylRepository $vinylRepo, AlbumRepository $albumRepository): Response
     {

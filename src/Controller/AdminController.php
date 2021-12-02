@@ -16,7 +16,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends AbstractController
 {
     /**
+     * Permet d'afficher la page admin
+     *
      * @Route("/admin", name="admin")
+     *
+     * @return Response
      */
     public function index(): Response
     {
@@ -25,7 +29,15 @@ class AdminController extends AbstractController
     }
 
     /**
+     * Permet d'afficher la page admin de gestion des artistes
+     *
      * @Route("/admin/artists", name="admin_artists")
+     *
+     * @param ArtistRepository $artistRepo
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     *
+     * @return Response
      */
     public function artists(ArtistRepository $artistRepo, Request $request, PaginatorInterface $paginator): Response
     {
@@ -41,7 +53,13 @@ class AdminController extends AbstractController
     }
 
     /**
+     * Permet d'afficher la page admin de gestion des genres
+     *
      * @Route("/admin/genres", name="admin_genres")
+     *
+     * @param GenreRepository $repo
+     *
+     * @return Response
      */
     public function genres(GenreRepository $repo): Response
     {
@@ -53,7 +71,14 @@ class AdminController extends AbstractController
     }
 
     /**
+     * Permet d'afficher la page admin de gestion des vinyles
+     *
      * @Route("/admin/vinyls", name="admin_vinyls")
+     * @param VinylRepository $repo
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     *
+     * @return Response
      */
     public function vinyls(VinylRepository $repo, Request $request, PaginatorInterface $paginator): Response
     {
@@ -69,7 +94,15 @@ class AdminController extends AbstractController
     }
 
     /**
+     * Permet d'afficher la page admin de gestion des albums
+     *
      * @Route("/admin/albums", name="admin_albums")
+     *
+     * @param AlbumRepository $repo
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     *
+     * @return Response
      */
     public function albums(AlbumRepository $repo, Request $request, PaginatorInterface $paginator): Response
     {
@@ -85,7 +118,15 @@ class AdminController extends AbstractController
     }
 
     /**
+     * Permet d'afficher la page admin de gestion des chansons
+     *
      * @Route("/admin/tracks", name="admin_tracks")
+     *
+     * @param TrackRepository $repo
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     *
+     * @return Response
      */
     public function tracks(TrackRepository $repo, Request $request, PaginatorInterface $paginator): Response
     {

@@ -16,7 +16,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class DetailsController extends AbstractController
 {
     /**
+     * Permet d'afficher la page d'un vinyle
+     *
      * @Route("/vinyle/{id}", name="vinyl")
+     *
+     * @param VinylRepository $repo
+     * @param $id
+     *
+     * @return Response
      */
     public function vinylDetail(VinylRepository $repo, $id): Response
     {
@@ -36,7 +43,14 @@ class DetailsController extends AbstractController
     }
 
     /**
+     * Permet d'afficher la page d'une chanson
+     *
      * @Route("/track/{id}", name="track")
+     *
+     * @param TrackRepository $repo
+     * @param $id
+     *
+     * @return Response
      */
     public function trackDetail(TrackRepository $repo, $id): Response
     {
@@ -47,7 +61,14 @@ class DetailsController extends AbstractController
     }
 
     /**
+     * Permet d'afficher la page d'un album
+     *
      * @Route("/album/{id}", name="album")
+     *
+     * @param AlbumRepository $repo
+     * @param $id
+     *
+     * @return Response
      */
     public function albumDetail(AlbumRepository $repo, $id): Response
     {
@@ -58,7 +79,14 @@ class DetailsController extends AbstractController
     }
 
     /**
+     * Permet d'afficher la page d'un artiste
+     *
      * @Route("/artist/{id}", name="artist")
+     *
+     * @param ArtistRepository $repo
+     * @param $id
+     *
+     * @return Response
      */
     public function artistDetail(ArtistRepository $repo, $id): Response
     {
@@ -69,7 +97,16 @@ class DetailsController extends AbstractController
     }
 
     /**
+     * Permet d'afficher la page d'un genre
+     *
      * @Route("/genre/{id}", name="genre")
+     *
+     * @param GenreRepository $repo
+     * @param $id
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     *
+     * @return Response
      */
     public function genreDetail(GenreRepository $repo, $id, PaginatorInterface $paginator, Request $request): Response
     {

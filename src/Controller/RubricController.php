@@ -16,7 +16,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class RubricController extends AbstractController
 {
     /**
+     * Permet d'afficher la page regroupant les vinyls
+     *
      * @Route("/vinyls", name="vinyls")
+     *
+     * @param VinylRepository $vinylRepo
+     * @param ArtistRepository $artistRepo
+     *
+     * @return Response
      */
     public function indexVinyls(VinylRepository $vinylRepo, ArtistRepository $artistRepo): Response
     {
@@ -29,7 +36,15 @@ class RubricController extends AbstractController
 
 
     /**
+     * Permet d'afficher la page regroupant les artistes
+     *
      * @Route("/artists", name="artists")
+     *
+     * @param ArtistRepository $repo
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     *
+     * @return Response
      */
     public function indexArtists(ArtistRepository $repo, Request $request, PaginatorInterface $paginator): Response
     {
@@ -46,7 +61,14 @@ class RubricController extends AbstractController
     }
 
     /**
+     * Permet d'afficher la page regroupant les albums
+     *
      * @Route("/albums", name="albums")
+     *
+     * @param AlbumRepository $albumRepository
+     * @param ArtistRepository $artistRepository
+     *
+     * @return Response
      */
     public function indexAlbums(AlbumRepository $albumRepository, ArtistRepository $artistRepository): Response
     {
@@ -59,7 +81,15 @@ class RubricController extends AbstractController
     }
 
     /**
+     * Permet d'afficher la page regroupant les genres
+     *
      * @Route("/genres", name="genres")
+     *
+     * @param GenreRepository $repo
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     *
+     * @return Response
      */
     public function indexGenres(GenreRepository $repo, Request $request, PaginatorInterface $paginator): Response
     {
@@ -75,7 +105,13 @@ class RubricController extends AbstractController
     }
 
     /**
+     * Permet d'afficher la page regroupant les chansons
+     *
      * @Route("/tracks", name="tracks")
+     *
+     * @param TrackRepository $repo
+     *
+     * @return Response
      */
     public function indexTracks(TrackRepository $repo): Response
     {

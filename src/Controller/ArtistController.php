@@ -16,7 +16,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class ArtistController extends AbstractController
 {
     /**
+     * Permet d'afficher et de gérer le formulaire d'ajout d'un artiste
+     *
      * @Route("/addArtist", name="add_artist")
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     *
+     * @return Response
      */
     public function addArtist(Request $request, EntityManagerInterface $manager): Response
     {
@@ -47,7 +54,16 @@ class ArtistController extends AbstractController
     }
 
     /**
+     * Permet d'afficher et de gérer le formulaire de modification d'un artiste
+     *
      * @Route("/updateArtist/{id}", name="updateArtist")
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param ArtistRepository $repo
+     * @param $id
+     *
+     * @return Response
      */
     public function updateArtist(Request $request, EntityManagerInterface $manager, ArtistRepository $repo, $id): Response
     {
@@ -81,9 +97,18 @@ class ArtistController extends AbstractController
     }
 
     /**
+     * Permet de gérer la suppression d'un artiste
+     *
      * @Route("/deleteArtist/{id}", name="deleteArtist")
+     *
+     * @param $id
+     * @param EntityManagerInterface $manager
+     * @param ArtistRepository $repo
+     *
+     * @return Response
      */
-    public function delete($id, EntityManagerInterface $manager, ArtistRepository $repo){
+    public function deleteArtist($id, EntityManagerInterface $manager, ArtistRepository $repo): Response
+    {
         $artist = $repo->find($id);
 
         $manager->remove($artist);

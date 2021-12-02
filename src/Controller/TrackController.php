@@ -15,7 +15,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class TrackController extends AbstractController
 {
     /**
+     * Permet d'afficher et gérer le formulaire d'ajout d'une chanson
+     *
      * @Route("/addTrack", name="add_track")
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     *
+     * @return Response
      */
     public function addTrack(Request $request, EntityManagerInterface $manager): Response
     {
@@ -46,7 +53,16 @@ class TrackController extends AbstractController
     }
 
     /**
+     * Permet d'afficher et gérer le formulaire de modification d'une chanson
+     *
      * @Route("/updateTrack/{id}", name="updateTrack")
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param TrackRepository $repo
+     * @param $id
+     *
+     * @return Response
      */
     public function updateTrack(Request $request, EntityManagerInterface $manager, TrackRepository $repo, $id): Response
     {
@@ -77,9 +93,18 @@ class TrackController extends AbstractController
     }
 
     /**
+     * Permet d'afficher et gérer le formulaire d'ajout d'une chanson à un album
+     *
      * @Route("/addTrackByAlbum/{id}", name="addTrackByAlbum")
+     *
+     * @param $id
+     * @param EntityManagerInterface $manager
+     * @param AlbumRepository $albumRepo
+     * @param Request $request
+     *
+     * @return Response
      */
-    public function addTrackByAlbum($id, EntityManagerInterface $manager, AlbumRepository $albumRepo, Request $request)
+    public function addTrackByAlbum($id, EntityManagerInterface $manager, AlbumRepository $albumRepo, Request $request): Response
     {
         $track = new Track();
 
@@ -110,9 +135,17 @@ class TrackController extends AbstractController
     }
 
     /**
+     * Permet de gérer la suppression d'une chanson
+     *
      * @Route("/deleteTrack/{id}", name="deleteTrack")
+     *
+     * @param $id
+     * @param EntityManagerInterface $manager
+     * @param TrackRepository $repo
+     * @return Response
      */
-    public function delete($id, EntityManagerInterface $manager, TrackRepository $repo){
+    public function deleteTrack($id, EntityManagerInterface $manager, TrackRepository $repo): Response
+    {
         $track = $repo->find($id);
         $albumId = $track->getAlbum()->getId();
 

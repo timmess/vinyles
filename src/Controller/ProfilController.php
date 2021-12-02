@@ -18,7 +18,13 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class ProfilController extends AbstractController
 {
     /**
+     * Permet d'afficher la page de profil
+     *
      * @Route("/profil/{id}", name="profil")
+     *
+     * @param $id
+     * @param UserRepository $repository
+     * @return Response
      */
     public function index($id, UserRepository $repository): Response
     {
@@ -30,7 +36,16 @@ class ProfilController extends AbstractController
     }
 
     /**
+     * Permet d'afficher la page de collection d'un user
+     *
      * @Route("/profil/{id}/collection", name="collection")
+     *
+     * @param $id
+     * @param UserRepository $repository
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     *
+     * @return Response
      */
     public function collection($id, UserRepository $repository, Request $request, PaginatorInterface $paginator): Response
     {
@@ -59,7 +74,17 @@ class ProfilController extends AbstractController
 
 
     /**
+     * Permet d'afficher la page de modification du profil d'un user
+     *
      * @Route("/updateUser/{id}", name="updateUser")
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param UserRepository $repo
+     * @param $id
+     * @param SluggerInterface $slugger
+     *
+     * @return Response
      */
     public function updateUser(Request $request, EntityManagerInterface $manager, UserRepository $repo, $id, SluggerInterface $slugger): Response
     {
@@ -72,11 +97,9 @@ class ProfilController extends AbstractController
         //        TODO: Create a service Uploadfile
         /**
          * Upload file
-         *
          ** @var UploadedFile $userPhoto
          */
         $userPhoto = $update_user_form->get('photo')->getData();
-
         if ($userPhoto) {
             $originalFilename = pathinfo($userPhoto->getClientOriginalName(), PATHINFO_FILENAME);
             // this is needed to safely include the file name as part of the URL
@@ -101,7 +124,6 @@ class ProfilController extends AbstractController
             // instead of its contents
             $user->setPhoto($newFilename);
         }
-
         if ($update_user_form->isSubmitted() && $update_user_form->isValid()){
             $user = $update_user_form->getData();
 

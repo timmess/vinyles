@@ -14,7 +14,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class GenreController extends AbstractController
 {
     /**
+     * Permet d'afficher et gérer le formulaire d'ajout de genre
+     *
      * @Route("/addGenre", name="add_genre")
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     *
+     * @return Response
      */
     public function addGenre(Request $request, EntityManagerInterface $manager): Response
     {
@@ -46,7 +53,16 @@ class GenreController extends AbstractController
     }
 
     /**
+     * Permet d'afficher et gérer le formulaire de modification de genre
+     *
      * @Route("/updateGenre/{id}", name="updateGenre")
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param GenreRepository $repo
+     * @param $id
+     *
+     * @return Response
      */
     public function updateGenre(Request $request, EntityManagerInterface $manager, GenreRepository $repo, $id): Response
     {
@@ -83,9 +99,18 @@ class GenreController extends AbstractController
     }
 
     /**
+     * Permet de gérer la suppression d'un genre
+     *
      * @Route("/deleteGenre/{id}", name="deleteGenre")
+     *
+     * @param $id
+     * @param EntityManagerInterface $manager
+     * @param GenreRepository $repo
+     *
+     * @return Response
      */
-    public function delete($id, EntityManagerInterface $manager, GenreRepository $repo){
+    public function delete($id, EntityManagerInterface $manager, GenreRepository $repo): Response
+    {
         $genre = $repo->find($id);
 
         $manager->remove($genre);

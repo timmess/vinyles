@@ -16,7 +16,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class VinylController extends AbstractController
 {
     /**
+     * Permet d'afficher et de gérer le formulaire d'ajout d'un vinyle
+     *
      * @Route("/addVinyle", name="add_vinyl")
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     *
+     * @return Response
      */
     public function addVinyl(Request $request, EntityManagerInterface $manager): Response
     {
@@ -48,7 +55,16 @@ class VinylController extends AbstractController
     }
 
     /**
+     * Permet d'afficher et de gérer le formulaire dde modification d'un vinyle
+     *
      * @Route("/updateVinyl/{id}", name="update_vinyl")
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param VinylRepository $repo
+     * @param $id
+     *
+     * @return Response
      */
     public function updateVinyl(Request $request, EntityManagerInterface $manager, VinylRepository $repo, $id): Response
     {
@@ -85,9 +101,18 @@ class VinylController extends AbstractController
     }
 
     /**
+     * Permet de gérer la suppression d'un vinyle
+     *
      * @Route("/deleteVinyl/{id}", name="deleteVinyl")
+     *
+     * @param $id
+     * @param EntityManagerInterface $manager
+     * @param VinylRepository $repo
+     *
+     * @return Response
      */
-    public function delete($id, EntityManagerInterface $manager, VinylRepository $repo){
+    public function delete($id, EntityManagerInterface $manager, VinylRepository $repo): Response
+    {
         $vinyl = $repo->find($id);
 
         $manager->remove($vinyl);
@@ -104,9 +129,18 @@ class VinylController extends AbstractController
     }
 
     /**
+     * Permet de gérer et d'afficher le formulaire d'ajout de vinyl à un album
+     *
      * @Route("/addVinylByAlbum/{id}", name="addVinylByAlbum")
+     *
+     * @param $id
+     * @param EntityManagerInterface $manager
+     * @param AlbumRepository $albumRepo
+     * @param Request $request
+     *
+     * @return Response
      */
-    public function addVinylByAlbum($id, EntityManagerInterface $manager, AlbumRepository $albumRepo, Request $request)
+    public function addVinylByAlbum($id, EntityManagerInterface $manager, AlbumRepository $albumRepo, Request $request): Response
     {
         $vinyl = new Vinyl();
 
@@ -144,9 +178,20 @@ class VinylController extends AbstractController
     }
 
     /**
+     * Permet de gérer l'ajout d'un vinyl à la collection d'un utilisateur
+     *
      * @Route("/addVinylToUserCollection/{id}/{userId}", name="addVinylToUserCollection")
+     *
+     * @param $userId
+     * @param $id
+     * @param VinylRepository $vinylRepository
+     * @param UserRepository $userRepository
+     * @param EntityManagerInterface $manager
+     *
+     * @return Response
      */
-    public function addVinylToUserCollection($userId, $id, VinylRepository $vinylRepository, UserRepository $userRepository, EntityManagerInterface $manager){
+    public function addVinylToUserCollection($userId, $id, VinylRepository $vinylRepository, UserRepository $userRepository, EntityManagerInterface $manager): Response
+    {
         $vinyl = $vinylRepository->find($id);
 
         $user = $userRepository->find($userId);
@@ -168,9 +213,20 @@ class VinylController extends AbstractController
     }
 
     /**
+     * Permet de gérer la suppression d'un vinyl de la collection d'un utilisateur
+     *
      * @Route("/removeVinylFromUserCollection/{id}/{userId}", name="removeVinylFromUserCollection")
+     *
+     * @param $userId
+     * @param $id
+     * @param VinylRepository $vinylRepository
+     * @param UserRepository $userRepository
+     * @param EntityManagerInterface $manager
+     *
+     * @return Response
      */
-    public function removeVinylFromUserCollection($userId, $id, VinylRepository $vinylRepository, UserRepository $userRepository, EntityManagerInterface $manager){
+    public function removeVinylFromUserCollection($userId, $id, VinylRepository $vinylRepository, UserRepository $userRepository, EntityManagerInterface $manager): Response
+    {
         $vinyl = $vinylRepository->find($id);
         $user = $userRepository->find($userId);
         $user->removeVinyl($vinyl);

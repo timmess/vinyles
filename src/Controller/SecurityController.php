@@ -17,7 +17,15 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class SecurityController extends AbstractController
 {
     /**
+     * Permet d'afficher et de gérer le formulaire d'inscription
+     *
      * @Route("/register", name="app_register")
+     *
+     * @param Request $request
+     * @param UserPasswordHasherInterface $passwordHasher
+     * @param SluggerInterface $slugger
+     *
+     * @return Response
      */
     public function register(Request $request, UserPasswordHasherInterface $passwordHasher, SluggerInterface $slugger): Response
     {
@@ -85,7 +93,13 @@ class SecurityController extends AbstractController
     }
 
     /**
+     * Permet d'afficher et de gérer le formulaire de connexion
+     *
      * @Route("/login", name="app_login")
+     *
+     * @param AuthenticationUtils $authenticationUtils
+     *
+     * @return Response
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -102,6 +116,8 @@ class SecurityController extends AbstractController
     }
 
     /**
+     * Permet de gérer la déconnexion
+     *
      * @Route("/logout", name="app_logout")
      */
     public function logout()
