@@ -8,9 +8,12 @@ use App\Repository\VinylRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ProfilController extends AbstractController
 {
@@ -58,13 +61,46 @@ class ProfilController extends AbstractController
     /**
      * @Route("/updateUser/{id}", name="updateUser")
      */
-    public function updateUser(Request $request, EntityManagerInterface $manager, UserRepository $repo, $id): Response
+    public function updateUser(Request $request, EntityManagerInterface $manager, UserRepository $repo, $id, SluggerInterface $slugger): Response
     {
         $user = $repo->find($id);
 
         $update_user_form = $this->createForm(UserType::class, $user);
 
         $update_user_form->handleRequest($request);
+
+        //        TODO: Create a service Uploadfile
+        /**
+         * Upload file
+         *
+         ** @var UploadedFile $userPhoto
+         */
+        $userPhoto = $update_user_form->get('photo')->getData();
+
+        if ($userPhoto) {
+            $originalFilename = pathinfo($userPhoto->getClientOriginalName(), PATHINFO_FILENAME);
+            // this is needed to safely include the file name as part of the URL
+            $safeFilename = $slugger->slug($originalFilename);
+            $newFilename = $safeFilename.'-'.uniqid().'.'.$userPhoto->guessExtension();
+
+            // Move the file to the directory where photos are stored
+            try {
+                $userPhoto->move(
+                    $this->getParameter('photos_directory'),
+                    $newFilename
+                );
+
+            } catch (FileException $e) {
+                return $this->render('security/register.html.twig', [
+                    'registrationForm'  => $update_user_form->createView(),
+                    'errors'            => $e->getMessage(),
+                ]);
+            }
+
+            // updates the 'photoFilename' property to store the PDF file name
+            // instead of its contents
+            $user->setPhoto($newFilename);
+        }
 
         if ($update_user_form->isSubmitted() && $update_user_form->isValid()){
             $user = $update_user_form->getData();

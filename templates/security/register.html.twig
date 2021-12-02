@@ -10,46 +10,32 @@
     </div>
 
     {{ form_start(registrationForm) }}
-    <h2 class="h4">Renseignez vos informations</h2>
-        <div class="input-group">
-            <div class="my-1">
-                {{form_row(registrationForm.firstname, {'label':false, 'attr':{'class' : 'form-control'}})}}
-            </div>
+        <h2 class="h4">Renseignez vos informations</h2>
+        <div class="input-group my-2">
+            {{form_row(registrationForm.firstname, {'label':false, 'attr':{'class' : 'form-control'}})}}
         </div>
-        <div class="input-group">
-            <div class="my-1">
-                {{form_row(registrationForm.lastname, {'label':false, 'attr':{'class' : 'form-control'}})}}
-            </div>
+        <div class="input-group my-2">
+            {{form_row(registrationForm.lastname, {'label':false, 'attr':{'class' : 'form-control'}})}}
         </div>
 
-        <div class="input-group">
-            <div class="my-1">
-                {{form_row(registrationForm.email, {'label':false, 'attr':{'class' : 'form-control'}})}}
-            </div>
+        <div class="input-group my-2">
+            {{form_row(registrationForm.email, {'label':false, 'attr':{'class' : 'form-control'}})}}
         </div>
 
-        <div class="input-group">
-            <div class="my-1">
-                {{form_row(registrationForm.photo, {'label':false, 'attr':{'class' : 'form-control'}})}}
-            </div>
+        <div class="input-group my-2">
+            {{form_row(registrationForm.photo, {'attr':{'class' : 'form-control'}})}}
         </div>
 
-        <div class="input-group">
-            <div class="my-1">
-                {{form_row(registrationForm.plainPassword.first, {'label':false, 'attr':{'class' : 'form-control'}})}}
-            </div>
+        <div class="input-group my-2">
+            {{form_row(registrationForm.plainPassword.first, {'label':false, 'attr':{'class' : 'form-control'}})}}
         </div>
 
-        <div class="input-group">
-            <div class="my-1">
-                {{form_row(registrationForm.plainPassword.second, {'label':false, 'attr':{'class' : 'form-control'}})}}
-            </div>
+        <div class="input-group my-2">
+            {{form_row(registrationForm.plainPassword.second, {'label':false, 'attr':{'class' : 'form-control'}})}}
         </div>
 
-        <div class="input-group">
-            <div class="my-1">
-                {{form_row(registrationForm.agreeTerms)}}
-            </div>
+        <div class="input-group my-2">
+            {{form_row(registrationForm.agreeTerms)}}
         </div>
 
         <button type="submit" class="btn btn-success">Enregistrer</button>

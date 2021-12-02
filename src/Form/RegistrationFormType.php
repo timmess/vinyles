@@ -5,12 +5,14 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -62,11 +64,22 @@ class RegistrationFormType extends AbstractType
                 ],
                 'label'   => false,
             ])
-            ->add('photo', TextType::class, [
+            ->add('photo', FileType::class, [
+                'label'   => "Photo de profil",
                 'attr' => [
-                    'placeholder'  => 'Url de la photo',
+                    'placeholder'  => 'Url de votre photo'
                 ],
-                'label'   => false,
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '5M',
+                        'mimeTypes' => [
+                            'image/*',
+                        ],
+                        'mimeTypesMessage' => 'Veuillez uploader une image dans son bon format (JPEG, PNG, SVG)',
+                    ])
+                ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
