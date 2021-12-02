@@ -9,7 +9,7 @@
 
     <p>{{ user.email }}</p>
 
-    <img src="{{ asset('images/uploads/user_photos/' ~ user.photo) }}" alt="">
+    <img src="{{ asset('images/uploads/user_photos/' ~ user.photo) }}" alt="" class="mh-23 object-fit-cover">
 
     <div>
         <a href="{{ path('updateUser', {id:user.id}) }}" class="btn btn-primary my-2">

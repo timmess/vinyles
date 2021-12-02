@@ -5,7 +5,7 @@
 {% block extra_section_up %}
     <div class="container-fluid hp_section_up d-flex flex-column justify-content-center">
         <div class="row text-center d-flex justify-content-center">
-            <div class="col-6 bg-black rounded bg-opacity-75 pb-3">
+            <div class="col-6 bg-black rounded bg-opacity-75 py-5 rounded-pill">
                 <p class="mb-2 h1 text-white fw-bold">Bienvenue sur Vinylium</p>
                 <p class="text-white h4">Ici vous pouvez référencer l'ensemble de vos vinyls !</p>
                 <a class="btn btn-warning px-5 py-3 rounded-pill fw-bold" href="{{ path('artists') }}">Créer ma collection</a>
@@ -36,13 +36,19 @@
     </div>
 
     <div class="row rounded my-3 bg-light text-dark">
-        <h2>Quelques albums populaires :</h2>
+        <h2 class="mb-4 fw-bold">Quelques albums populaires</h2>
 
         {% for album in albums %}
             <div class="col-4">
-                <h3><a class="text-dark text-decoration-none" href="{{ path('album',{id:album.id}) }}">{{ album.name }}</a></h3>
                 <a href="{{ path('album',{id:album.id}) }}"><img src="{{ album.photo }}" alt="" class="px-1 w-100 he-25 object-fit-cover"></a>
-                <p><a class="text-dark text-decoration-none" href="{{ path('artist',{id:album.artist.id}) }}">{{ album.artist.name }}</a></p>
+                <h3>
+                    <a class="text-dark text-decoration-none" href="{{ path('artist',{id:album.artist.id}) }}">
+                        {{ album.artist.name }}
+                    </a> -
+                    <a class="text-dark text-decoration-none" href="{{ path('album',{id:album.id}) }}">
+                        {{ album.name }}
+                    </a>
+                </h3>
             </div>
         {% endfor %}
     </div>
@@ -53,7 +59,8 @@
         <div class="row text-center d-flex justify-content-center">
             <div class="col-6 bg-black rounded bg-opacity-75 pb-3">
                 <p class="mb-2 h1 text-white">Tu ne trouves pas ton bonheur ?</p>
-                <a class="btn btn-primary" href="{{ path('genres') }}">Parcourir les genres</a>
+                <p class="text-white h4">Essayes de trouver quelque chose de nouveau !</p>
+                <a class="btn btn-warning px-5 py-3 rounded-pill fw-bold" href="{{ path('genres') }}">Parcourir les genres</a>
             </div>
         </div>
     </div>

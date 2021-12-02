@@ -110,16 +110,24 @@
                 <a class="text-dark primary-hover text-decoration-none" href="{{ path('vinyl', {id: vinyl.id}) }}">
                     {{ vinyl.title }} ({{ vinyl.releasedate | date("d/m/Y") }})
                 </a>
-                <div>
+                <div class="col-3 d-flex align-items-center justify-content-between">
                     {% if app.user %}
                         {% if vinyl not in app.user.vinyls %}
                             <a href="{{ path('addVinylToUserCollection', {id:vinyl.id, userId: app.user.id}) }}"
                                data-bs-toggle="tooltip"
                                data-bs-placement="top"
-                               title="Ajouter à ma collection"><i class="far fa-plus-square fs-2"></i>
+                               title="Ajouter à ma collection"
+                               class="text-decoration-none">
+                                <i class="far fa-plus-square fs-2">
+
+                                </i>
                             </a>
                         {% else %}
-                            <p class="m-0">Vous possédez ce vinyle</p>
+                            <i class="far fa-check-circle fs-2 primary-color"
+                               data-bs-toggle="tooltip"
+                               data-bs-placement="top"
+                               title="Vous possédez ce vinyle"></i>
+                            <p class="m-0"></p>
                         {% endif %}
                     {% endif %}
                     {% if admin %}
