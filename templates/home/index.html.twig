@@ -6,27 +6,36 @@
     <div class="container-fluid hp_section_up d-flex flex-column justify-content-center">
         <div class="row text-center d-flex justify-content-center">
             <div class="col-6 bg-black rounded bg-opacity-75 pb-3">
-                <p class="mb-2 h1 text-white">Tu souhaites sauvegarder tes vinyles ?</p>
-                <a class="btn btn-primary" href="{{ path('artists') }}">Commencer ma collection !</a>
+                <p class="mb-2 h1 text-white fw-bold">Bienvenue sur Vinylium</p>
+                <p class="text-white h4">Ici vous pouvez référencer l'ensemble de vos vinyls !</p>
+                <a class="btn btn-warning px-5 py-3 rounded-pill fw-bold" href="{{ path('artists') }}">Créer ma collection</a>
             </div>
         </div>
     </div>
 {% endblock %}
 
 {% block body %}
-    <div class="row shadow rounded my-3 bg-light text-dark p-3">
-        <h2 class="mb-4">Nos derniers vinyls ajoutés :</h2>
+    <div class="row rounded my-3 bg-light text-dark p-3">
+        <h2 class="mb-4 fw-bold">Nos derniers vinyls ajoutés</h2>
 
         {% for vinyl in last_vinyls %}
             <div class="col-4">
-                <h3><a class="text-dark text-decoration-none" href="{{ path('vinyl',{id:vinyl.id}) }}">{{ vinyl.title }}</a></h3>
-                <a href="{{ path('vinyl',{id:vinyl.id}) }}"><img src="{{ vinyl.photo }}" alt="" class="w-100 he-25 object-fit-cover shadow-hover"></a>
-                <p><a class="text-dark text-decoration-none" href="{{ path('artist',{id:vinyl.artist.id}) }}">{{ vinyl.artist.name }}</a> - <a class="text-dark text-decoration-none" href="{{ path('album',{id:vinyl.album.id}) }}">{{ vinyl.album.name }}</a></p>
+                <a href="{{ path('vinyl',{id:vinyl.id}) }}">
+                    <img src="{{ vinyl.photo }}" alt="" class="w-100 he-25 object-fit-cover shadow-hover">
+                </a>
+                <h3>
+                    <a class="text-dark text-decoration-none" href="{{ path('artist',{id:vinyl.artist.id}) }}">
+                        {{ vinyl.artist.name }}
+                    </a> -
+                    <a class="text-dark text-decoration-none" href="{{ path('album',{id:vinyl.album.id}) }}">
+                        {{ vinyl.album.name }}
+                    </a>
+                </h3>
             </div>
         {% endfor %}
     </div>
 
-    <div class="row shadow rounded my-3 bg-light text-dark">
+    <div class="row rounded my-3 bg-light text-dark">
         <h2>Quelques albums populaires :</h2>
 
         {% for album in albums %}

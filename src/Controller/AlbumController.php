@@ -84,7 +84,7 @@ class AlbumController extends AbstractController
     /**
      * @Route("/deleteAlbum/{id}", name="deleteAlbum")
      */
-    public function delete($id, EntityManagerInterface $manager, AlbumRepository $repo){
+    public function deleteAlbum($id, EntityManagerInterface $manager, AlbumRepository $repo){
         $album = $repo->find($id);
 
         $manager->remove($album);

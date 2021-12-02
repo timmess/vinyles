@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,14 +26,18 @@ class RegistrationFormType extends AbstractType
                 ],
                 'label'   => false,
             ])
-            ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
+            ->add('plainPassword', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'invalid_message' => 'Le mot de passe renseigné doit être le même.',
                 'mapped' => false,
-                'attr' => [
-                    'autocomplete' => 'new-password',
-                    'placeholder'  => 'Mot de passe',
-                    ],
+                'required' => true,
+                'label'   => false,
+                'first_options'  => ['attr' => [
+                    'placeholder' => 'Mot de passe'
+                ]],
+                'second_options' => ['attr' => [
+                    'placeholder' => 'Confirmation du mot de passe'
+                ]],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Merci d\'entrer un mot de passe',
@@ -44,7 +49,6 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
-                'label'   => false,
             ])
             ->add('firstname', TextType::class, [
                 'attr' => [
