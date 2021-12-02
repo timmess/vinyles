@@ -35,91 +35,93 @@
             {% for album in artist.albums %}
                 <li class="list-group-item w-50 d-flex justify-content-between align-items-center">
                     <a href="{{ path('album', {id: album.id}) }}" class="text-decoration-none">
-                        <img src="{{ album.photo }}" alt="{{ album.name }}" class="w-10">
+                        <img src="{{ album.photo }}" alt="{{ album.name }}" class="mx-h-3">
                         {{ album.name }}
                     </a>
                     {% if admin %}
-                        <a href="{{ path('updateAlbum', {id:album.id}) }}" class="btn btn-primary text-end me-1">
-                            <i class="fas fa-pen"></i>
-                        </a>
+                        <div>
+                            <a href="{{ path('updateAlbum', {id:album.id}) }}" class="btn btn-primary text-end me-1">
+                                <i class="fas fa-pen"></i>
+                            </a>
 
-                        <!-- Button trigger modal -->
-                        <button type="button"
-                                class="fw-bold btn btn-danger text-end"
-                                data-bs-toggle="modal"
-                                data-bs-target="#removeAlbum{{ i }}">
-                            X
-                        </button>
+                            <!-- Button trigger modal -->
+                            <button type="button"
+                                    class="fw-bold btn btn-danger text-end"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#removeAlbum{{ i }}">
+                                X
+                            </button>
 
-                        <!-- Modal 1 -->
-                        <div class="modal fade"
-                             id="removeAlbum{{ i }}"
-                             tabindex="-1"
-                             aria-labelledby="exampleModalLabel"
-                             aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Attention</h5>
-                                        <button type="button"
-                                                class="btn-close"
-                                                data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p class="h5">
-                                            Souhaitez vous réellement supprimer {{ artist.name }} définitivement ?
-                                            Cette action efface également tous les titres de cet album
-                                            ainsi que tous ses vinyles !!
-                                        </p>
-                                        <button type="button"
-                                                class="fw-bold btn btn-danger text-end"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#removeArtist{{ i+1 }}">
-                                            Supprimer
-                                        </button>
-                                        <button type="button"
-                                                class="btn btn-primary"
-                                                data-bs-dismiss="modal"
-                                                aria-label="Close"
-                                        >
-                                            Non
-                                        </button>
+                            <!-- Modal 1 -->
+                            <div class="modal fade"
+                                 id="removeAlbum{{ i }}"
+                                 tabindex="-1"
+                                 aria-labelledby="exampleModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Attention</h5>
+                                            <button type="button"
+                                                    class="btn-close"
+                                                    data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="h5">
+                                                Souhaitez vous réellement supprimer {{ artist.name }} définitivement ?
+                                                Cette action efface également tous les titres de cet album
+                                                ainsi que tous ses vinyles !!
+                                            </p>
+                                            <button type="button"
+                                                    class="fw-bold btn btn-danger text-end"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#removeArtist{{ i+1 }}">
+                                                Supprimer
+                                            </button>
+                                            <button type="button"
+                                                    class="btn btn-primary"
+                                                    data-bs-dismiss="modal"
+                                                    aria-label="Close"
+                                            >
+                                                Non
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Modal 2 -->
-                        <div class="modal fade"
-                             id="removeArtist{{ i+1 }}"
-                             tabindex="-1"
-                             aria-labelledby="exampleModalLabel"
-                             aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">
-                                            Attention
-                                        </h5>
-                                        <button type="button"
-                                                class="btn-close"
-                                                data-bs-dismiss="modal"
-                                                aria-label="Close">
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p class="h5">Vous êtes sûr ? Cette action est irreversible !</p>
-                                        <a href="{{ path('deleteAlbum', {id:album.id}) }}"
-                                           class="fw-bold btn btn-danger text-end">
-                                            Oui, je suis sûr.
-                                        </a>
-                                        <button type="button"
-                                                class="btn btn-primary"
-                                                data-bs-dismiss="modal"
-                                                aria-label="Close">
-                                            Non
-                                        </button>
+                            <!-- Modal 2 -->
+                            <div class="modal fade"
+                                 id="removeArtist{{ i+1 }}"
+                                 tabindex="-1"
+                                 aria-labelledby="exampleModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">
+                                                Attention
+                                            </h5>
+                                            <button type="button"
+                                                    class="btn-close"
+                                                    data-bs-dismiss="modal"
+                                                    aria-label="Close">
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="h5">Vous êtes sûr ? Cette action est irreversible !</p>
+                                            <a href="{{ path('deleteAlbum', {id:album.id}) }}"
+                                               class="fw-bold btn btn-danger text-end">
+                                                Oui, je suis sûr.
+                                            </a>
+                                            <button type="button"
+                                                    class="btn btn-primary"
+                                                    data-bs-dismiss="modal"
+                                                    aria-label="Close">
+                                                Non
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
