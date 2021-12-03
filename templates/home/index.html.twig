@@ -24,11 +24,11 @@
                     <img src="{{ vinyl.photo }}" alt="" class="w-100 he-25 object-fit-cover shadow-hover">
                 </a>
                 <h3>
-                    <a class="text-dark text-decoration-none" href="{{ path('artist',{id:vinyl.artist.id}) }}">
+                    <a class="text-dark text-decoration-none primary-hover h5" href="{{ path('artist',{id:vinyl.artist.id}) }}">
                         {{ vinyl.artist.name }}
                     </a> -
-                    <a class="text-dark text-decoration-none" href="{{ path('album',{id:vinyl.album.id}) }}">
-                        {{ vinyl.album.name }}
+                    <a class="text-dark text-decoration-none primary-hover h5" href="{{ path('album',{id:vinyl.album.id}) }}">
+                        {{ vinyl.album.name }} <span class="h5">({{ vinyl.pressingNumber }})</span>
                     </a>
                 </h3>
             </div>
@@ -42,10 +42,10 @@
             <div class="col-4">
                 <a href="{{ path('album',{id:album.id}) }}"><img src="{{ album.photo }}" alt="" class="px-1 w-100 he-25 object-fit-cover"></a>
                 <h3>
-                    <a class="text-dark text-decoration-none" href="{{ path('artist',{id:album.artist.id}) }}">
+                    <a class="text-dark text-decoration-none h5" href="{{ path('artist',{id:album.artist.id}) }}">
                         {{ album.artist.name }}
                     </a> -
-                    <a class="text-dark text-decoration-none" href="{{ path('album',{id:album.id}) }}">
+                    <a class="text-dark text-decoration-none h5" href="{{ path('album',{id:album.id}) }}">
                         {{ album.name }}
                     </a>
                 </h3>
