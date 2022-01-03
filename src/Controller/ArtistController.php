@@ -9,9 +9,12 @@ use App\Form\AddArtistType;
 use App\Repository\ArtistRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ArtistController extends AbstractController
 {
@@ -62,16 +65,49 @@ class ArtistController extends AbstractController
      * @param EntityManagerInterface $manager
      * @param ArtistRepository $repo
      * @param $id
+     * @param SluggerInterface $slugger
      *
      * @return Response
      */
-    public function updateArtist(Request $request, EntityManagerInterface $manager, ArtistRepository $repo, $id): Response
+    public function updateArtist(Request $request, EntityManagerInterface $manager, SluggerInterface $slugger, ArtistRepository $repo, $id): Response
     {
         $artist = $repo->find($id);
 
         $update_artist_form = $this->createForm(AddArtistType::class, $artist);
 
         $update_artist_form->handleRequest($request);
+
+        /**
+         * Upload file
+         *
+         ** @var UploadedFile $artistPhoto
+         */
+        $artistPhoto = $update_artist_form->get('photo')->getData();
+
+        if ($artistPhoto) {
+            $originalFilename = pathinfo($artistPhoto->getClientOriginalName(), PATHINFO_FILENAME);
+            // this is needed to safely include the file name as part of the URL
+            $safeFilename = $slugger->slug($originalFilename);
+            $newFilename = $safeFilename.'-'.uniqid().'.'.$artistPhoto->guessExtension();
+
+            // Move the file to the directory where photos are stored
+            try {
+                $artistPhoto->move(
+                    $this->getParameter('artist_photos_directory'),
+                    $newFilename
+                );
+
+            } catch (FileException $e) {
+                return $this->render('security/register.html.twig', [
+                    'registrationForm'  => $update_artist_form->createView(),
+                    'errors'            => $e->getMessage(),
+                ]);
+            }
+
+            // updates the 'photoFilename' property to store the PDF file name
+            // instead of its contents
+            $artist->setPhoto($newFilename);
+        }
 
         if ($update_artist_form->isSubmitted() and $update_artist_form->isValid()){
             $artist = $update_artist_form->getData();

@@ -11,8 +11,11 @@
             </a>
         </div>
     {% endif %}
-    <img src="{{ artist.photo }}" alt="" class="mh-23">
-    
+    {% if artist.photo | length > 0 %}
+        <img src="{{ asset('images/uploads/artist_photos/' ~ artist.photo) }}" alt="" class="mh-23">
+    {% else %}
+        <img src="{{ asset('images/avatar.png') }}" alt="Avatar" class="mh-23">
+    {% endif %}
     <h2>Genres</h2>
     <ul class="list-group">
         {% for genre in artist.genres %}

@@ -6,11 +6,13 @@ use App\Entity\Artist;
 use App\Entity\Genre;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class AddArtistType extends AbstractType
 {
@@ -29,11 +31,21 @@ class AddArtistType extends AbstractType
                 ],
                 'label'   => false,
             ])
-            ->add('photo',TextType::class, [
+            ->add('photo',FileType::class, [
                 'attr' => [
                     'placeholder'  => 'Url de la photo'
                 ],
-                'label'   => false,
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '5M',
+                        'mimeTypes' => [
+                            'image/*',
+                        ],
+                        'mimeTypesMessage' => 'Veuillez uploader une image dans son bon format (JPEG, PNG, SVG)',
+                    ])
+                ],
             ])
             ->add('genres', EntityType::class, [
                 'class' => Genre::class,

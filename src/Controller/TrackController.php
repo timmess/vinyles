@@ -118,6 +118,8 @@ class TrackController extends AbstractController
         {
             $track = $add_track_by_album_type->getData();
 
+            $track->setPosition(intval($track->getPosition()));
+
             $manager->persist($track);
 
             $manager->flush();

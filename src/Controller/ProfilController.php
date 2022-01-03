@@ -109,7 +109,7 @@ class ProfilController extends AbstractController
             // Move the file to the directory where photos are stored
             try {
                 $userPhoto->move(
-                    $this->getParameter('photos_directory'),
+                    $this->getParameter('user_photos_directory'),
                     $newFilename
                 );
 

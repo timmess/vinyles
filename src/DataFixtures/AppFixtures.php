@@ -77,7 +77,7 @@ class AppFixtures extends Fixture
             $r = rand(0,3);
 
             $artist ->setName($faker->name)
-                    ->setPhoto('https://via.placeholder.com/450')
+                    ->setPhoto('images/vinyls2.jpg')
                     ->addGenre($genres[$r])
                     ->setDescription($faker->paragraph);
             $r = rand(0,3);

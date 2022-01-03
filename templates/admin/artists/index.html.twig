@@ -11,7 +11,7 @@
         {% set i = 1 %}
         {% for artist in artists %}
             <div class="col-2 my-2">
-                <img src="{{ artist.photo }}" alt="" class="w-100">
+                <img src="{{ asset('images/uploads/artist_photos/' ~ artist.photo) }}" alt="" class="w-100">
             </div>
             <div class="col-4 my-2">
                 <h2 class="h5">{{ artist.name }}</h2>
